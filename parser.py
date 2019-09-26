@@ -2,7 +2,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 #Numero de tests
-test_num = 12
+test_num = 15 +1
 # Palabras reservadas del lenguaje
 reserved = {
     'do': 'DO',
@@ -105,7 +105,7 @@ def t_error(t):
 
 lexer = lex.lex()
 
-
+print("TOKEN TEST WITH " + str(test_num) + " FILES")
 for num in range(test_num):
     print("Lexer test number" + str(num))
     with open("tests/test"+str(num)+".ex", 'r') as file:
@@ -140,7 +140,8 @@ names = {}
 
 
 def p_expr(t):
-    '''statement : statement statement
+    '''statements : statements statement
+        | statement
         | expression'''
 
 
@@ -151,20 +152,20 @@ def p_assign(t):
 
 
 def p_func(t):
-    '''statement : DEF NAME LPAREN NAME RPAREN DO statement END'''
+    '''statement : DEF NAME LPAREN NAME RPAREN DO statements END'''
 
 
 def p_if(t):
-    '''statement : IF statement DO statement END
-                 | IF statement DO statement ELSE statement END'''
+    '''statement : IF expression DO statements END
+                 | IF expression DO statements ELSE statements END'''
 
 
 def p_for(t):
-    'statement : FOR NAME FOREXPR NAME DO statement END'
+    'statement : FOR NAME FOREXPR NAME DO statements END'
 
 
 def p_while(t):
-    'statement : WHILE statement DO statement END'
+    'statement : WHILE expression DO statements END'
 
 
 def p_number(t):
@@ -237,7 +238,7 @@ def p_error(t):
 
 parser = yacc.yacc()
 # print(names)
-
+print("\n\nPARSE TEST WITH " + str(test_num) + " FILES")
 for num in range(test_num):
     print("Test number" + str(num))
     with open("tests/test"+str(num)+".ex", 'r') as file:
