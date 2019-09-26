@@ -1,26 +1,31 @@
 import ply.lex as lex
 import ply.yacc as yacc
 
-#Numero de tests
-test_num = 15 +1
+# Numero de tests
+test_num = 15 + 1
 # Palabras reservadas del lenguaje
 reserved = {
+    'def': 'DEF',
     'do': 'DO',
     'else': 'ELSE',
     'end': 'END',
     'for': 'FOR',
     'if': 'IF',
     'while': 'WHILE',
-    'def': 'DEF'
+    'true': 'TRUE',
+    'false': 'FALSE'
+    # 'gets': 'GETS',
+    # 'puts': 'PUTS',
+    # 'io': 'IO'
 }
 
 # Lista de token que acepta el parser unida con las palabras reservadas
 tokens = [
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'CONSTANT',
-    'GREATEQ', 'LESSEQ', 'AND', 'TRUE', 'FALSE',
-    'LPAREN', 'RPAREN', 'CHAR', 'OR', 'FOREXPR',
+    'GREATEQ', 'LESSEQ', 'AND',
+    'PARENL', 'PARENR', 'CHAR', 'OR', 'FOREXPR',
     'NAME', 'INT', 'DOUBLE', 'GREATER', 'LESS',
-    'STRING', 'NUMBER'
+    'STRING'
     # 'COMMA'
 ] + list(reserved.values())
 
@@ -30,29 +35,32 @@ tokens = [
 
 # t_COMMA = r','
 # t_COMMENT = r'\#.*'
-t_STRING = r'\"[a-zA-Z0-9_\ ][a-zA-Z0-9_\ ]*\"'
+# t_ignore_COMMENT = r'\#.*'
+# t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_AND = r'&'
 t_CHAR = r'\'[a-zA-Z0-9_+\*\- :,\s]*\''
 t_CONSTANT = r'\@[a-zA-Z_][a-zA-Z0-9_]*'
+t_DEF = r'def'
 t_DIVIDE = r'/'
 t_EQUALS = r'='
-t_TRUE = r'true'
 t_FALSE = r'false'
 t_FOREXPR = r'<-'
+# t_GETS = r'gets'
 t_GREATEQ = r'>='
 t_GREATER = r'>'
-t_ignore = " \t"
-t_LESS = r'<'
-t_LPAREN = r'\('
-t_MINUS = r'-'
-# t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
-t_OR = r'\|'
-t_PLUS = r'\+'
-t_RPAREN = r'\)'
-t_TIMES = r'\*'
 t_IF = r'if'
-t_DEF = r'def'
-# t_ignore_COMMENT = r'\#.*'
+t_ignore = " \t"
+# t_IO = r'IO\.'
+t_LESS = r'<'
+t_MINUS = r'-'
+t_OR = r'\|'
+t_PARENL = r'\('
+t_PARENR = r'\)'
+t_PLUS = r'\+'
+# t_PUTS = r'puts'
+t_STRING = r'\"[a-zA-Z0-9_\ ][a-zA-Z0-9_\ ]*\"'
+t_TIMES = r'\*'
+t_TRUE = r'true'
 
 
 def t_NAME(t):
@@ -62,10 +70,10 @@ def t_NAME(t):
     return t
 
 
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
+# def t_NUMBER(t):
+#     r'\d+'
+#     t.value = int(t.value)
+#     return t
 
 
 def t_COMMENT(t):
@@ -73,7 +81,7 @@ def t_COMMENT(t):
     pass
 
 
-def t_FLOAT(t):
+def t_DOUBLE(t):
     r'[0-9]+\.[0-9]+'
     try:
         t.value = float(t.value)
@@ -107,8 +115,8 @@ lexer = lex.lex()
 
 print("TOKEN TEST WITH " + str(test_num) + " FILES")
 for num in range(test_num):
-    print("Lexer test number" + str(num))
-    with open("tests/test"+str(num)+".ex", 'r') as file:
+    print("Lexer test number " + str(num))
+    with open("tests/test" + str(num) + ".ex", 'r') as file:
         data = file.read()
     res = lexer.input(data)
     while True:
@@ -124,11 +132,11 @@ precedence = (
     ('left', 'DO', 'END', 'AND', 'OR', 'IF', 'ELSE', 'FOR', 'WHILE', 'TRUE',
      'FALSE', 'FOREXPR', 'NAME'),
     ('left', 'EQUALS', 'CONSTANT', 'CHAR', 'INT',
-     'STRING', 'DOUBLE', 'NUMBER'),
+     'STRING', 'DOUBLE'),
     ('left', 'GREATER', 'LESS', 'GREATEQ', 'LESSEQ'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
-    ('left', 'LPAREN', 'RPAREN'),
+    ('left', 'PARENL', 'PARENR'),
     ('right', 'UMINUS'),
 )
 
@@ -152,12 +160,13 @@ def p_assign(t):
 
 
 def p_func(t):
-    '''statement : DEF NAME LPAREN NAME RPAREN DO statements END'''
+    '''statement : DEF NAME PARENL NAME PARENR DO statements END'''
 
 
 def p_if(t):
     '''statement : IF expression DO statements END
-                 | IF expression DO statements ELSE statements END'''
+                 | IF expression DO statements ELSE statements END
+                 '''
 
 
 def p_for(t):
@@ -167,9 +176,18 @@ def p_for(t):
 def p_while(t):
     'statement : WHILE expression DO statements END'
 
+# def p_puts(t):
+#     '''statement : IO PUTS PARENL statement PARENR
+#                  | IO PUTS statement
+#                  '''
+#
+# def p_gets(t):
+#     '''statement : IO GETS NUMBER
+#     | IO GETS STRING
+#     '''
 
-def p_number(t):
-    'expression : NUMBER'
+# def p_number(t):
+#     'expression : NUMBER'
 
 
 def p_binary(t):
@@ -194,7 +212,7 @@ def p_minus(t):
 
 
 def p_group(t):
-    'expression : LPAREN expression RPAREN'
+    'expression : PARENL expression PARENR'
 
 
 def p_int(t):
@@ -226,22 +244,16 @@ def p_name(t):
 
 
 def p_error(t):
-    # print(t)
     if t != None:
         print("Syntax error at '%s'" % t.value)
-    # else:
-    #     print("No errors")
-    # if not t:
-    #     print("SYNTAX ERROR AT EOF")
-    #
 
 
 parser = yacc.yacc()
-# print(names)
+
 print("\n\nPARSE TEST WITH " + str(test_num) + " FILES")
 for num in range(test_num):
-    print("Test number" + str(num))
-    with open("tests/test"+str(num)+".ex", 'r') as file:
+    print("Test number " + str(num))
+    with open("tests/test" + str(num) + ".ex", 'r') as file:
         data = file.read()
     res = parser.parse(data)
     print("-----------------------------------")
