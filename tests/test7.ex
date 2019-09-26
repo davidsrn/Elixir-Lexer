@@ -1,1 +1,4 @@
-if x = 1 do x end
+if x < 3 do
+  #nothing haha
+  haha = "haha"
+end
