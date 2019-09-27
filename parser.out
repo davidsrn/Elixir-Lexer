@@ -12,65 +12,63 @@ Rule 6     statement -> DEF NAME PARENL NAME PARENR DO statements END
 Rule 7     statement -> IF expression DO statements END
 Rule 8     statement -> IF expression DO statements ELSE statements END
 Rule 9     statement -> FOR NAME FOREXPR NAME DO statements END
-Rule 10    statement -> WHILE expression DO statements END
-Rule 11    expression -> expression PLUS expression
-Rule 12    expression -> expression MINUS expression
-Rule 13    expression -> expression TIMES expression
-Rule 14    expression -> expression DIVIDE expression
-Rule 15    expression -> expression GREATER expression
-Rule 16    expression -> expression LESS expression
-Rule 17    expression -> expression GREATEQ expression
-Rule 18    expression -> expression LESSEQ expression
-Rule 19    expression -> expression AND expression
-Rule 20    expression -> expression OR expression
-Rule 21    expression -> MINUS expression
-Rule 22    expression -> PARENL expression PARENR
-Rule 23    expression -> INT
-Rule 24    expression -> DOUBLE
-Rule 25    expression -> CHAR
-Rule 26    expression -> TRUE
-Rule 27    expression -> FALSE
-Rule 28    expression -> STRING
-Rule 29    expression -> NAME
+Rule 10    expression -> expression PLUS expression
+Rule 11    expression -> expression MINUS expression
+Rule 12    expression -> expression TIMES expression
+Rule 13    expression -> expression DIVIDE expression
+Rule 14    expression -> expression GREATER expression
+Rule 15    expression -> expression LESS expression
+Rule 16    expression -> expression GREATEQ expression
+Rule 17    expression -> expression LESSEQ expression
+Rule 18    expression -> expression AND expression
+Rule 19    expression -> expression OR expression
+Rule 20    expression -> MINUS expression
+Rule 21    expression -> PARENL expression PARENR
+Rule 22    expression -> INT
+Rule 23    expression -> DOUBLE
+Rule 24    expression -> CHAR
+Rule 25    expression -> TRUE
+Rule 26    expression -> FALSE
+Rule 27    expression -> STRING
+Rule 28    expression -> NAME
 
 Terminals, with rules where they appear
 
-AND                  : 19
-CHAR                 : 25
+AND                  : 18
+CHAR                 : 24
 CONSTANT             : 5
 DEF                  : 6
-DIVIDE               : 14
-DO                   : 6 7 8 9 10
-DOUBLE               : 24
+DIVIDE               : 13
+DO                   : 6 7 8 9
+DOUBLE               : 23
 ELSE                 : 8
-END                  : 6 7 8 9 10
+END                  : 6 7 8 9
 EQUALS               : 4
-FALSE                : 27
+FALSE                : 26
 FOR                  : 9
 FOREXPR              : 9
-GREATEQ              : 17
-GREATER              : 15
+GREATEQ              : 16
+GREATER              : 14
 IF                   : 7 8
-INT                  : 23
-LESS                 : 16
-LESSEQ               : 18
-MINUS                : 12 21
-NAME                 : 4 6 6 9 9 29
-OR                   : 20
-PARENL               : 6 22
-PARENR               : 6 22
-PLUS                 : 11
-STRING               : 28
-TIMES                : 13
-TRUE                 : 26
-WHILE                : 10
+INT                  : 22
+LESS                 : 15
+LESSEQ               : 17
+MINUS                : 11 20
+NAME                 : 4 6 6 9 9 28
+OR                   : 19
+PARENL               : 6 21
+PARENR               : 6 21
+PLUS                 : 10
+STRING               : 27
+TIMES                : 12
+TRUE                 : 25
 error                : 
 
 Nonterminals, with rules where they appear
 
-expression           : 3 4 5 7 8 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 22
+expression           : 3 4 5 7 8 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 21
 statement            : 1 2
-statements           : 1 6 7 8 8 9 10 0
+statements           : 1 6 7 8 8 9 0
 
 Parsing method: LALR
 
@@ -86,144 +84,106 @@ state 0
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    NAME            shift and go to state 14
+    NAME            shift and go to state 13
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
 
-    expression                     shift and go to state 17
-    statements                     shift and go to state 4
-    statement                      shift and go to state 9
+    expression                     shift and go to state 16
+    statements                     shift and go to state 3
+    statement                      shift and go to state 8
 
 state 1
 
     (5) statement -> CONSTANT . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 19
+    expression                     shift and go to state 18
 
 state 2
 
-    (25) expression -> CHAR .
+    (24) expression -> CHAR .
 
-    PLUS            reduce using rule 25 (expression -> CHAR .)
-    MINUS           reduce using rule 25 (expression -> CHAR .)
-    TIMES           reduce using rule 25 (expression -> CHAR .)
-    DIVIDE          reduce using rule 25 (expression -> CHAR .)
-    GREATER         reduce using rule 25 (expression -> CHAR .)
-    LESS            reduce using rule 25 (expression -> CHAR .)
-    GREATEQ         reduce using rule 25 (expression -> CHAR .)
-    LESSEQ          reduce using rule 25 (expression -> CHAR .)
-    AND             reduce using rule 25 (expression -> CHAR .)
-    OR              reduce using rule 25 (expression -> CHAR .)
-    NAME            reduce using rule 25 (expression -> CHAR .)
-    CONSTANT        reduce using rule 25 (expression -> CHAR .)
-    DEF             reduce using rule 25 (expression -> CHAR .)
-    IF              reduce using rule 25 (expression -> CHAR .)
-    FOR             reduce using rule 25 (expression -> CHAR .)
-    WHILE           reduce using rule 25 (expression -> CHAR .)
-    $end            reduce using rule 25 (expression -> CHAR .)
-    END             reduce using rule 25 (expression -> CHAR .)
-    ELSE            reduce using rule 25 (expression -> CHAR .)
-    DO              reduce using rule 25 (expression -> CHAR .)
-    PARENR          reduce using rule 25 (expression -> CHAR .)
+    PLUS            reduce using rule 24 (expression -> CHAR .)
+    MINUS           reduce using rule 24 (expression -> CHAR .)
+    TIMES           reduce using rule 24 (expression -> CHAR .)
+    DIVIDE          reduce using rule 24 (expression -> CHAR .)
+    GREATER         reduce using rule 24 (expression -> CHAR .)
+    LESS            reduce using rule 24 (expression -> CHAR .)
+    GREATEQ         reduce using rule 24 (expression -> CHAR .)
+    LESSEQ          reduce using rule 24 (expression -> CHAR .)
+    AND             reduce using rule 24 (expression -> CHAR .)
+    OR              reduce using rule 24 (expression -> CHAR .)
+    NAME            reduce using rule 24 (expression -> CHAR .)
+    CONSTANT        reduce using rule 24 (expression -> CHAR .)
+    DEF             reduce using rule 24 (expression -> CHAR .)
+    IF              reduce using rule 24 (expression -> CHAR .)
+    FOR             reduce using rule 24 (expression -> CHAR .)
+    $end            reduce using rule 24 (expression -> CHAR .)
+    END             reduce using rule 24 (expression -> CHAR .)
+    ELSE            reduce using rule 24 (expression -> CHAR .)
+    DO              reduce using rule 24 (expression -> CHAR .)
+    PARENR          reduce using rule 24 (expression -> CHAR .)
 
 
 state 3
-
-    (10) statement -> WHILE . expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
-
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
-    CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
-
-    expression                     shift and go to state 20
-
-state 4
 
     (0) S' -> statements .
     (1) statements -> statements . statement
@@ -233,114 +193,110 @@ state 4
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
 
-    NAME            shift and go to state 21
+    NAME            shift and go to state 19
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
 
-    statement                      shift and go to state 22
+    statement                      shift and go to state 20
+
+state 4
+
+    (25) expression -> TRUE .
+
+    PLUS            reduce using rule 25 (expression -> TRUE .)
+    MINUS           reduce using rule 25 (expression -> TRUE .)
+    TIMES           reduce using rule 25 (expression -> TRUE .)
+    DIVIDE          reduce using rule 25 (expression -> TRUE .)
+    GREATER         reduce using rule 25 (expression -> TRUE .)
+    LESS            reduce using rule 25 (expression -> TRUE .)
+    GREATEQ         reduce using rule 25 (expression -> TRUE .)
+    LESSEQ          reduce using rule 25 (expression -> TRUE .)
+    AND             reduce using rule 25 (expression -> TRUE .)
+    OR              reduce using rule 25 (expression -> TRUE .)
+    NAME            reduce using rule 25 (expression -> TRUE .)
+    CONSTANT        reduce using rule 25 (expression -> TRUE .)
+    DEF             reduce using rule 25 (expression -> TRUE .)
+    IF              reduce using rule 25 (expression -> TRUE .)
+    FOR             reduce using rule 25 (expression -> TRUE .)
+    $end            reduce using rule 25 (expression -> TRUE .)
+    END             reduce using rule 25 (expression -> TRUE .)
+    ELSE            reduce using rule 25 (expression -> TRUE .)
+    DO              reduce using rule 25 (expression -> TRUE .)
+    PARENR          reduce using rule 25 (expression -> TRUE .)
+
 
 state 5
 
-    (26) expression -> TRUE .
+    (20) expression -> MINUS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    PLUS            reduce using rule 26 (expression -> TRUE .)
-    MINUS           reduce using rule 26 (expression -> TRUE .)
-    TIMES           reduce using rule 26 (expression -> TRUE .)
-    DIVIDE          reduce using rule 26 (expression -> TRUE .)
-    GREATER         reduce using rule 26 (expression -> TRUE .)
-    LESS            reduce using rule 26 (expression -> TRUE .)
-    GREATEQ         reduce using rule 26 (expression -> TRUE .)
-    LESSEQ          reduce using rule 26 (expression -> TRUE .)
-    AND             reduce using rule 26 (expression -> TRUE .)
-    OR              reduce using rule 26 (expression -> TRUE .)
-    NAME            reduce using rule 26 (expression -> TRUE .)
-    CONSTANT        reduce using rule 26 (expression -> TRUE .)
-    DEF             reduce using rule 26 (expression -> TRUE .)
-    IF              reduce using rule 26 (expression -> TRUE .)
-    FOR             reduce using rule 26 (expression -> TRUE .)
-    WHILE           reduce using rule 26 (expression -> TRUE .)
-    $end            reduce using rule 26 (expression -> TRUE .)
-    END             reduce using rule 26 (expression -> TRUE .)
-    ELSE            reduce using rule 26 (expression -> TRUE .)
-    DO              reduce using rule 26 (expression -> TRUE .)
-    PARENR          reduce using rule 26 (expression -> TRUE .)
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
+    CHAR            shift and go to state 2
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
+    expression                     shift and go to state 21
 
 state 6
 
-    (21) expression -> MINUS . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (6) statement -> DEF . NAME PARENL NAME PARENR DO statements END
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
-    CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    NAME            shift and go to state 22
 
-    expression                     shift and go to state 23
 
 state 7
 
-    (6) statement -> DEF . NAME PARENL NAME PARENR DO statements END
+    (27) expression -> STRING .
 
-    NAME            shift and go to state 24
+    PLUS            reduce using rule 27 (expression -> STRING .)
+    MINUS           reduce using rule 27 (expression -> STRING .)
+    TIMES           reduce using rule 27 (expression -> STRING .)
+    DIVIDE          reduce using rule 27 (expression -> STRING .)
+    GREATER         reduce using rule 27 (expression -> STRING .)
+    LESS            reduce using rule 27 (expression -> STRING .)
+    GREATEQ         reduce using rule 27 (expression -> STRING .)
+    LESSEQ          reduce using rule 27 (expression -> STRING .)
+    AND             reduce using rule 27 (expression -> STRING .)
+    OR              reduce using rule 27 (expression -> STRING .)
+    NAME            reduce using rule 27 (expression -> STRING .)
+    CONSTANT        reduce using rule 27 (expression -> STRING .)
+    DEF             reduce using rule 27 (expression -> STRING .)
+    IF              reduce using rule 27 (expression -> STRING .)
+    FOR             reduce using rule 27 (expression -> STRING .)
+    $end            reduce using rule 27 (expression -> STRING .)
+    END             reduce using rule 27 (expression -> STRING .)
+    ELSE            reduce using rule 27 (expression -> STRING .)
+    DO              reduce using rule 27 (expression -> STRING .)
+    PARENR          reduce using rule 27 (expression -> STRING .)
 
 
 state 8
-
-    (28) expression -> STRING .
-
-    PLUS            reduce using rule 28 (expression -> STRING .)
-    MINUS           reduce using rule 28 (expression -> STRING .)
-    TIMES           reduce using rule 28 (expression -> STRING .)
-    DIVIDE          reduce using rule 28 (expression -> STRING .)
-    GREATER         reduce using rule 28 (expression -> STRING .)
-    LESS            reduce using rule 28 (expression -> STRING .)
-    GREATEQ         reduce using rule 28 (expression -> STRING .)
-    LESSEQ          reduce using rule 28 (expression -> STRING .)
-    AND             reduce using rule 28 (expression -> STRING .)
-    OR              reduce using rule 28 (expression -> STRING .)
-    NAME            reduce using rule 28 (expression -> STRING .)
-    CONSTANT        reduce using rule 28 (expression -> STRING .)
-    DEF             reduce using rule 28 (expression -> STRING .)
-    IF              reduce using rule 28 (expression -> STRING .)
-    FOR             reduce using rule 28 (expression -> STRING .)
-    WHILE           reduce using rule 28 (expression -> STRING .)
-    $end            reduce using rule 28 (expression -> STRING .)
-    END             reduce using rule 28 (expression -> STRING .)
-    ELSE            reduce using rule 28 (expression -> STRING .)
-    DO              reduce using rule 28 (expression -> STRING .)
-    PARENR          reduce using rule 28 (expression -> STRING .)
-
-
-state 9
 
     (2) statements -> statement .
 
@@ -350,210 +306,205 @@ state 9
     DEF             reduce using rule 2 (statements -> statement .)
     IF              reduce using rule 2 (statements -> statement .)
     FOR             reduce using rule 2 (statements -> statement .)
-    WHILE           reduce using rule 2 (statements -> statement .)
     $end            reduce using rule 2 (statements -> statement .)
     ELSE            reduce using rule 2 (statements -> statement .)
 
 
-state 10
+state 9
 
     (7) statement -> IF . expression DO statements END
     (8) statement -> IF . expression DO statements ELSE statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 25
+    expression                     shift and go to state 23
 
-state 11
+state 10
 
     (9) statement -> FOR . NAME FOREXPR NAME DO statements END
 
-    NAME            shift and go to state 26
+    NAME            shift and go to state 24
 
+
+state 11
+
+    (21) expression -> PARENL . expression PARENR
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
+
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
+    CHAR            shift and go to state 2
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
+
+    expression                     shift and go to state 25
 
 state 12
 
-    (22) expression -> PARENL . expression PARENR
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (26) expression -> FALSE .
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
-    CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    PLUS            reduce using rule 26 (expression -> FALSE .)
+    MINUS           reduce using rule 26 (expression -> FALSE .)
+    TIMES           reduce using rule 26 (expression -> FALSE .)
+    DIVIDE          reduce using rule 26 (expression -> FALSE .)
+    GREATER         reduce using rule 26 (expression -> FALSE .)
+    LESS            reduce using rule 26 (expression -> FALSE .)
+    GREATEQ         reduce using rule 26 (expression -> FALSE .)
+    LESSEQ          reduce using rule 26 (expression -> FALSE .)
+    AND             reduce using rule 26 (expression -> FALSE .)
+    OR              reduce using rule 26 (expression -> FALSE .)
+    NAME            reduce using rule 26 (expression -> FALSE .)
+    CONSTANT        reduce using rule 26 (expression -> FALSE .)
+    DEF             reduce using rule 26 (expression -> FALSE .)
+    IF              reduce using rule 26 (expression -> FALSE .)
+    FOR             reduce using rule 26 (expression -> FALSE .)
+    $end            reduce using rule 26 (expression -> FALSE .)
+    END             reduce using rule 26 (expression -> FALSE .)
+    ELSE            reduce using rule 26 (expression -> FALSE .)
+    DO              reduce using rule 26 (expression -> FALSE .)
+    PARENR          reduce using rule 26 (expression -> FALSE .)
 
-    expression                     shift and go to state 27
 
 state 13
 
-    (27) expression -> FALSE .
+    (4) statement -> NAME . EQUALS expression
+    (28) expression -> NAME .
 
-    PLUS            reduce using rule 27 (expression -> FALSE .)
-    MINUS           reduce using rule 27 (expression -> FALSE .)
-    TIMES           reduce using rule 27 (expression -> FALSE .)
-    DIVIDE          reduce using rule 27 (expression -> FALSE .)
-    GREATER         reduce using rule 27 (expression -> FALSE .)
-    LESS            reduce using rule 27 (expression -> FALSE .)
-    GREATEQ         reduce using rule 27 (expression -> FALSE .)
-    LESSEQ          reduce using rule 27 (expression -> FALSE .)
-    AND             reduce using rule 27 (expression -> FALSE .)
-    OR              reduce using rule 27 (expression -> FALSE .)
-    NAME            reduce using rule 27 (expression -> FALSE .)
-    CONSTANT        reduce using rule 27 (expression -> FALSE .)
-    DEF             reduce using rule 27 (expression -> FALSE .)
-    IF              reduce using rule 27 (expression -> FALSE .)
-    FOR             reduce using rule 27 (expression -> FALSE .)
-    WHILE           reduce using rule 27 (expression -> FALSE .)
-    $end            reduce using rule 27 (expression -> FALSE .)
-    END             reduce using rule 27 (expression -> FALSE .)
-    ELSE            reduce using rule 27 (expression -> FALSE .)
-    DO              reduce using rule 27 (expression -> FALSE .)
-    PARENR          reduce using rule 27 (expression -> FALSE .)
+    EQUALS          shift and go to state 26
+    PLUS            reduce using rule 28 (expression -> NAME .)
+    MINUS           reduce using rule 28 (expression -> NAME .)
+    TIMES           reduce using rule 28 (expression -> NAME .)
+    DIVIDE          reduce using rule 28 (expression -> NAME .)
+    GREATER         reduce using rule 28 (expression -> NAME .)
+    LESS            reduce using rule 28 (expression -> NAME .)
+    GREATEQ         reduce using rule 28 (expression -> NAME .)
+    LESSEQ          reduce using rule 28 (expression -> NAME .)
+    AND             reduce using rule 28 (expression -> NAME .)
+    OR              reduce using rule 28 (expression -> NAME .)
+    END             reduce using rule 28 (expression -> NAME .)
+    ELSE            reduce using rule 28 (expression -> NAME .)
+    NAME            reduce using rule 28 (expression -> NAME .)
+    CONSTANT        reduce using rule 28 (expression -> NAME .)
+    DEF             reduce using rule 28 (expression -> NAME .)
+    IF              reduce using rule 28 (expression -> NAME .)
+    FOR             reduce using rule 28 (expression -> NAME .)
+    $end            reduce using rule 28 (expression -> NAME .)
 
 
 state 14
 
-    (4) statement -> NAME . EQUALS expression
-    (29) expression -> NAME .
+    (22) expression -> INT .
 
-    EQUALS          shift and go to state 28
-    PLUS            reduce using rule 29 (expression -> NAME .)
-    MINUS           reduce using rule 29 (expression -> NAME .)
-    TIMES           reduce using rule 29 (expression -> NAME .)
-    DIVIDE          reduce using rule 29 (expression -> NAME .)
-    GREATER         reduce using rule 29 (expression -> NAME .)
-    LESS            reduce using rule 29 (expression -> NAME .)
-    GREATEQ         reduce using rule 29 (expression -> NAME .)
-    LESSEQ          reduce using rule 29 (expression -> NAME .)
-    AND             reduce using rule 29 (expression -> NAME .)
-    OR              reduce using rule 29 (expression -> NAME .)
-    END             reduce using rule 29 (expression -> NAME .)
-    NAME            reduce using rule 29 (expression -> NAME .)
-    CONSTANT        reduce using rule 29 (expression -> NAME .)
-    DEF             reduce using rule 29 (expression -> NAME .)
-    IF              reduce using rule 29 (expression -> NAME .)
-    FOR             reduce using rule 29 (expression -> NAME .)
-    WHILE           reduce using rule 29 (expression -> NAME .)
-    $end            reduce using rule 29 (expression -> NAME .)
-    ELSE            reduce using rule 29 (expression -> NAME .)
+    PLUS            reduce using rule 22 (expression -> INT .)
+    MINUS           reduce using rule 22 (expression -> INT .)
+    TIMES           reduce using rule 22 (expression -> INT .)
+    DIVIDE          reduce using rule 22 (expression -> INT .)
+    GREATER         reduce using rule 22 (expression -> INT .)
+    LESS            reduce using rule 22 (expression -> INT .)
+    GREATEQ         reduce using rule 22 (expression -> INT .)
+    LESSEQ          reduce using rule 22 (expression -> INT .)
+    AND             reduce using rule 22 (expression -> INT .)
+    OR              reduce using rule 22 (expression -> INT .)
+    NAME            reduce using rule 22 (expression -> INT .)
+    CONSTANT        reduce using rule 22 (expression -> INT .)
+    DEF             reduce using rule 22 (expression -> INT .)
+    IF              reduce using rule 22 (expression -> INT .)
+    FOR             reduce using rule 22 (expression -> INT .)
+    $end            reduce using rule 22 (expression -> INT .)
+    END             reduce using rule 22 (expression -> INT .)
+    ELSE            reduce using rule 22 (expression -> INT .)
+    DO              reduce using rule 22 (expression -> INT .)
+    PARENR          reduce using rule 22 (expression -> INT .)
 
 
 state 15
 
-    (23) expression -> INT .
+    (23) expression -> DOUBLE .
 
-    PLUS            reduce using rule 23 (expression -> INT .)
-    MINUS           reduce using rule 23 (expression -> INT .)
-    TIMES           reduce using rule 23 (expression -> INT .)
-    DIVIDE          reduce using rule 23 (expression -> INT .)
-    GREATER         reduce using rule 23 (expression -> INT .)
-    LESS            reduce using rule 23 (expression -> INT .)
-    GREATEQ         reduce using rule 23 (expression -> INT .)
-    LESSEQ          reduce using rule 23 (expression -> INT .)
-    AND             reduce using rule 23 (expression -> INT .)
-    OR              reduce using rule 23 (expression -> INT .)
-    NAME            reduce using rule 23 (expression -> INT .)
-    CONSTANT        reduce using rule 23 (expression -> INT .)
-    DEF             reduce using rule 23 (expression -> INT .)
-    IF              reduce using rule 23 (expression -> INT .)
-    FOR             reduce using rule 23 (expression -> INT .)
-    WHILE           reduce using rule 23 (expression -> INT .)
-    $end            reduce using rule 23 (expression -> INT .)
-    END             reduce using rule 23 (expression -> INT .)
-    ELSE            reduce using rule 23 (expression -> INT .)
-    DO              reduce using rule 23 (expression -> INT .)
-    PARENR          reduce using rule 23 (expression -> INT .)
+    PLUS            reduce using rule 23 (expression -> DOUBLE .)
+    MINUS           reduce using rule 23 (expression -> DOUBLE .)
+    TIMES           reduce using rule 23 (expression -> DOUBLE .)
+    DIVIDE          reduce using rule 23 (expression -> DOUBLE .)
+    GREATER         reduce using rule 23 (expression -> DOUBLE .)
+    LESS            reduce using rule 23 (expression -> DOUBLE .)
+    GREATEQ         reduce using rule 23 (expression -> DOUBLE .)
+    LESSEQ          reduce using rule 23 (expression -> DOUBLE .)
+    AND             reduce using rule 23 (expression -> DOUBLE .)
+    OR              reduce using rule 23 (expression -> DOUBLE .)
+    NAME            reduce using rule 23 (expression -> DOUBLE .)
+    CONSTANT        reduce using rule 23 (expression -> DOUBLE .)
+    DEF             reduce using rule 23 (expression -> DOUBLE .)
+    IF              reduce using rule 23 (expression -> DOUBLE .)
+    FOR             reduce using rule 23 (expression -> DOUBLE .)
+    $end            reduce using rule 23 (expression -> DOUBLE .)
+    END             reduce using rule 23 (expression -> DOUBLE .)
+    ELSE            reduce using rule 23 (expression -> DOUBLE .)
+    DO              reduce using rule 23 (expression -> DOUBLE .)
+    PARENR          reduce using rule 23 (expression -> DOUBLE .)
 
 
 state 16
 
-    (24) expression -> DOUBLE .
-
-    PLUS            reduce using rule 24 (expression -> DOUBLE .)
-    MINUS           reduce using rule 24 (expression -> DOUBLE .)
-    TIMES           reduce using rule 24 (expression -> DOUBLE .)
-    DIVIDE          reduce using rule 24 (expression -> DOUBLE .)
-    GREATER         reduce using rule 24 (expression -> DOUBLE .)
-    LESS            reduce using rule 24 (expression -> DOUBLE .)
-    GREATEQ         reduce using rule 24 (expression -> DOUBLE .)
-    LESSEQ          reduce using rule 24 (expression -> DOUBLE .)
-    AND             reduce using rule 24 (expression -> DOUBLE .)
-    OR              reduce using rule 24 (expression -> DOUBLE .)
-    NAME            reduce using rule 24 (expression -> DOUBLE .)
-    CONSTANT        reduce using rule 24 (expression -> DOUBLE .)
-    DEF             reduce using rule 24 (expression -> DOUBLE .)
-    IF              reduce using rule 24 (expression -> DOUBLE .)
-    FOR             reduce using rule 24 (expression -> DOUBLE .)
-    WHILE           reduce using rule 24 (expression -> DOUBLE .)
-    $end            reduce using rule 24 (expression -> DOUBLE .)
-    END             reduce using rule 24 (expression -> DOUBLE .)
-    ELSE            reduce using rule 24 (expression -> DOUBLE .)
-    DO              reduce using rule 24 (expression -> DOUBLE .)
-    PARENR          reduce using rule 24 (expression -> DOUBLE .)
-
-
-state 17
-
     (3) statements -> expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
     END             reduce using rule 3 (statements -> expression .)
     NAME            reduce using rule 3 (statements -> expression .)
@@ -561,61 +512,59 @@ state 17
     DEF             reduce using rule 3 (statements -> expression .)
     IF              reduce using rule 3 (statements -> expression .)
     FOR             reduce using rule 3 (statements -> expression .)
-    WHILE           reduce using rule 3 (statements -> expression .)
     $end            reduce using rule 3 (statements -> expression .)
     ELSE            reduce using rule 3 (statements -> expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
-    AND             shift and go to state 29
-    OR              shift and go to state 30
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+    AND             shift and go to state 27
+    OR              shift and go to state 28
+
+
+state 17
+
+    (28) expression -> NAME .
+
+    PLUS            reduce using rule 28 (expression -> NAME .)
+    MINUS           reduce using rule 28 (expression -> NAME .)
+    TIMES           reduce using rule 28 (expression -> NAME .)
+    DIVIDE          reduce using rule 28 (expression -> NAME .)
+    GREATER         reduce using rule 28 (expression -> NAME .)
+    LESS            reduce using rule 28 (expression -> NAME .)
+    GREATEQ         reduce using rule 28 (expression -> NAME .)
+    LESSEQ          reduce using rule 28 (expression -> NAME .)
+    AND             reduce using rule 28 (expression -> NAME .)
+    OR              reduce using rule 28 (expression -> NAME .)
+    NAME            reduce using rule 28 (expression -> NAME .)
+    CONSTANT        reduce using rule 28 (expression -> NAME .)
+    DEF             reduce using rule 28 (expression -> NAME .)
+    IF              reduce using rule 28 (expression -> NAME .)
+    FOR             reduce using rule 28 (expression -> NAME .)
+    $end            reduce using rule 28 (expression -> NAME .)
+    END             reduce using rule 28 (expression -> NAME .)
+    ELSE            reduce using rule 28 (expression -> NAME .)
+    DO              reduce using rule 28 (expression -> NAME .)
+    PARENR          reduce using rule 28 (expression -> NAME .)
 
 
 state 18
 
-    (29) expression -> NAME .
-
-    PLUS            reduce using rule 29 (expression -> NAME .)
-    MINUS           reduce using rule 29 (expression -> NAME .)
-    TIMES           reduce using rule 29 (expression -> NAME .)
-    DIVIDE          reduce using rule 29 (expression -> NAME .)
-    GREATER         reduce using rule 29 (expression -> NAME .)
-    LESS            reduce using rule 29 (expression -> NAME .)
-    GREATEQ         reduce using rule 29 (expression -> NAME .)
-    LESSEQ          reduce using rule 29 (expression -> NAME .)
-    AND             reduce using rule 29 (expression -> NAME .)
-    OR              reduce using rule 29 (expression -> NAME .)
-    NAME            reduce using rule 29 (expression -> NAME .)
-    CONSTANT        reduce using rule 29 (expression -> NAME .)
-    DEF             reduce using rule 29 (expression -> NAME .)
-    IF              reduce using rule 29 (expression -> NAME .)
-    FOR             reduce using rule 29 (expression -> NAME .)
-    WHILE           reduce using rule 29 (expression -> NAME .)
-    $end            reduce using rule 29 (expression -> NAME .)
-    END             reduce using rule 29 (expression -> NAME .)
-    ELSE            reduce using rule 29 (expression -> NAME .)
-    DO              reduce using rule 29 (expression -> NAME .)
-    PARENR          reduce using rule 29 (expression -> NAME .)
-
-
-state 19
-
     (5) statement -> CONSTANT expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
     END             reduce using rule 5 (statement -> CONSTANT expression .)
     NAME            reduce using rule 5 (statement -> CONSTANT expression .)
@@ -623,56 +572,28 @@ state 19
     DEF             reduce using rule 5 (statement -> CONSTANT expression .)
     IF              reduce using rule 5 (statement -> CONSTANT expression .)
     FOR             reduce using rule 5 (statement -> CONSTANT expression .)
-    WHILE           reduce using rule 5 (statement -> CONSTANT expression .)
-    ELSE            reduce using rule 5 (statement -> CONSTANT expression .)
     $end            reduce using rule 5 (statement -> CONSTANT expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
-    AND             shift and go to state 29
-    OR              shift and go to state 30
+    ELSE            reduce using rule 5 (statement -> CONSTANT expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+    AND             shift and go to state 27
+    OR              shift and go to state 28
 
 
-state 20
-
-    (10) statement -> WHILE expression . DO statements END
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
-
-    DO              shift and go to state 39
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
-    AND             shift and go to state 29
-    OR              shift and go to state 30
-
-
-state 21
+state 19
 
     (4) statement -> NAME . EQUALS expression
 
-    EQUALS          shift and go to state 28
+    EQUALS          shift and go to state 26
 
 
-state 22
+state 20
 
     (1) statements -> statements statement .
 
@@ -682,573 +603,519 @@ state 22
     DEF             reduce using rule 1 (statements -> statements statement .)
     IF              reduce using rule 1 (statements -> statements statement .)
     FOR             reduce using rule 1 (statements -> statements statement .)
-    WHILE           reduce using rule 1 (statements -> statements statement .)
     $end            reduce using rule 1 (statements -> statements statement .)
     ELSE            reduce using rule 1 (statements -> statements statement .)
 
 
+state 21
+
+    (20) expression -> MINUS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
+
+    PLUS            reduce using rule 20 (expression -> MINUS expression .)
+    MINUS           reduce using rule 20 (expression -> MINUS expression .)
+    TIMES           reduce using rule 20 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 20 (expression -> MINUS expression .)
+    GREATER         reduce using rule 20 (expression -> MINUS expression .)
+    LESS            reduce using rule 20 (expression -> MINUS expression .)
+    GREATEQ         reduce using rule 20 (expression -> MINUS expression .)
+    LESSEQ          reduce using rule 20 (expression -> MINUS expression .)
+    AND             reduce using rule 20 (expression -> MINUS expression .)
+    OR              reduce using rule 20 (expression -> MINUS expression .)
+    NAME            reduce using rule 20 (expression -> MINUS expression .)
+    CONSTANT        reduce using rule 20 (expression -> MINUS expression .)
+    DEF             reduce using rule 20 (expression -> MINUS expression .)
+    IF              reduce using rule 20 (expression -> MINUS expression .)
+    FOR             reduce using rule 20 (expression -> MINUS expression .)
+    $end            reduce using rule 20 (expression -> MINUS expression .)
+    END             reduce using rule 20 (expression -> MINUS expression .)
+    ELSE            reduce using rule 20 (expression -> MINUS expression .)
+    DO              reduce using rule 20 (expression -> MINUS expression .)
+    PARENR          reduce using rule 20 (expression -> MINUS expression .)
+
+  ! PLUS            [ shift and go to state 34 ]
+  ! MINUS           [ shift and go to state 35 ]
+  ! TIMES           [ shift and go to state 32 ]
+  ! DIVIDE          [ shift and go to state 29 ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
+
+
+state 22
+
+    (6) statement -> DEF NAME . PARENL NAME PARENR DO statements END
+
+    PARENL          shift and go to state 37
+
+
 state 23
 
-    (21) expression -> MINUS expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (7) statement -> IF expression . DO statements END
+    (8) statement -> IF expression . DO statements ELSE statements END
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    PLUS            reduce using rule 21 (expression -> MINUS expression .)
-    MINUS           reduce using rule 21 (expression -> MINUS expression .)
-    TIMES           reduce using rule 21 (expression -> MINUS expression .)
-    DIVIDE          reduce using rule 21 (expression -> MINUS expression .)
-    GREATER         reduce using rule 21 (expression -> MINUS expression .)
-    LESS            reduce using rule 21 (expression -> MINUS expression .)
-    GREATEQ         reduce using rule 21 (expression -> MINUS expression .)
-    LESSEQ          reduce using rule 21 (expression -> MINUS expression .)
-    AND             reduce using rule 21 (expression -> MINUS expression .)
-    OR              reduce using rule 21 (expression -> MINUS expression .)
-    NAME            reduce using rule 21 (expression -> MINUS expression .)
-    CONSTANT        reduce using rule 21 (expression -> MINUS expression .)
-    DEF             reduce using rule 21 (expression -> MINUS expression .)
-    IF              reduce using rule 21 (expression -> MINUS expression .)
-    FOR             reduce using rule 21 (expression -> MINUS expression .)
-    WHILE           reduce using rule 21 (expression -> MINUS expression .)
-    $end            reduce using rule 21 (expression -> MINUS expression .)
-    END             reduce using rule 21 (expression -> MINUS expression .)
-    ELSE            reduce using rule 21 (expression -> MINUS expression .)
-    DO              reduce using rule 21 (expression -> MINUS expression .)
-    PARENR          reduce using rule 21 (expression -> MINUS expression .)
-
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! TIMES           [ shift and go to state 34 ]
-  ! DIVIDE          [ shift and go to state 31 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+    DO              shift and go to state 38
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+    AND             shift and go to state 27
+    OR              shift and go to state 28
 
 
 state 24
 
-    (6) statement -> DEF NAME . PARENL NAME PARENR DO statements END
+    (9) statement -> FOR NAME . FOREXPR NAME DO statements END
 
-    PARENL          shift and go to state 40
+    FOREXPR         shift and go to state 39
 
 
 state 25
 
-    (7) statement -> IF expression . DO statements END
-    (8) statement -> IF expression . DO statements ELSE statements END
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (21) expression -> PARENL expression . PARENR
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    DO              shift and go to state 41
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
-    AND             shift and go to state 29
-    OR              shift and go to state 30
+    PARENR          shift and go to state 40
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+    AND             shift and go to state 27
+    OR              shift and go to state 28
 
 
 state 26
 
-    (9) statement -> FOR NAME . FOREXPR NAME DO statements END
+    (4) statement -> NAME EQUALS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    FOREXPR         shift and go to state 42
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
+    CHAR            shift and go to state 2
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
+    expression                     shift and go to state 41
 
 state 27
 
-    (22) expression -> PARENL expression . PARENR
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (18) expression -> expression AND . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    PARENR          shift and go to state 43
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
-    AND             shift and go to state 29
-    OR              shift and go to state 30
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
+    CHAR            shift and go to state 2
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
+    expression                     shift and go to state 42
 
 state 28
 
-    (4) statement -> NAME EQUALS . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (19) expression -> expression OR . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 44
+    expression                     shift and go to state 43
 
 state 29
 
-    (19) expression -> expression AND . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (13) expression -> expression DIVIDE . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 45
+    expression                     shift and go to state 44
 
 state 30
 
-    (20) expression -> expression OR . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (16) expression -> expression GREATEQ . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 46
+    expression                     shift and go to state 45
 
 state 31
 
-    (14) expression -> expression DIVIDE . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (15) expression -> expression LESS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 47
+    expression                     shift and go to state 46
 
 state 32
 
-    (17) expression -> expression GREATEQ . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (12) expression -> expression TIMES . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 48
+    expression                     shift and go to state 47
 
 state 33
 
-    (16) expression -> expression LESS . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (17) expression -> expression LESSEQ . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 49
+    expression                     shift and go to state 48
 
 state 34
 
-    (13) expression -> expression TIMES . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> expression PLUS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 50
+    expression                     shift and go to state 49
 
 state 35
 
-    (18) expression -> expression LESSEQ . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (11) expression -> expression MINUS . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 51
+    expression                     shift and go to state 50
 
 state 36
 
-    (11) expression -> expression PLUS . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (14) expression -> expression GREATER . expression
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
+    NAME            shift and go to state 17
 
-    expression                     shift and go to state 52
+    expression                     shift and go to state 51
 
 state 37
 
-    (12) expression -> expression MINUS . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
-
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
-    CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
-
-    expression                     shift and go to state 53
-
-state 38
-
-    (15) expression -> expression GREATER . expression
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
-
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
-    CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-    NAME            shift and go to state 18
-
-    expression                     shift and go to state 54
-
-state 39
-
-    (10) statement -> WHILE expression DO . statements END
-    (1) statements -> . statements statement
-    (2) statements -> . statement
-    (3) statements -> . expression
-    (4) statement -> . NAME EQUALS expression
-    (5) statement -> . CONSTANT expression
-    (6) statement -> . DEF NAME PARENL NAME PARENR DO statements END
-    (7) statement -> . IF expression DO statements END
-    (8) statement -> . IF expression DO statements ELSE statements END
-    (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
-
-    NAME            shift and go to state 14
-    CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
-    CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
-
-    statements                     shift and go to state 55
-    expression                     shift and go to state 17
-    statement                      shift and go to state 9
-
-state 40
-
     (6) statement -> DEF NAME PARENL . NAME PARENR DO statements END
 
-    NAME            shift and go to state 56
+    NAME            shift and go to state 52
 
 
-state 41
+state 38
 
     (7) statement -> IF expression DO . statements END
     (8) statement -> IF expression DO . statements ELSE statements END
@@ -1261,93 +1128,90 @@ state 41
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    NAME            shift and go to state 14
+    NAME            shift and go to state 13
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
 
-    statements                     shift and go to state 57
-    expression                     shift and go to state 17
-    statement                      shift and go to state 9
+    statements                     shift and go to state 53
+    expression                     shift and go to state 16
+    statement                      shift and go to state 8
 
-state 42
+state 39
 
     (9) statement -> FOR NAME FOREXPR . NAME DO statements END
 
-    NAME            shift and go to state 58
+    NAME            shift and go to state 54
 
 
-state 43
+state 40
 
-    (22) expression -> PARENL expression PARENR .
+    (21) expression -> PARENL expression PARENR .
 
-    PLUS            reduce using rule 22 (expression -> PARENL expression PARENR .)
-    MINUS           reduce using rule 22 (expression -> PARENL expression PARENR .)
-    TIMES           reduce using rule 22 (expression -> PARENL expression PARENR .)
-    DIVIDE          reduce using rule 22 (expression -> PARENL expression PARENR .)
-    GREATER         reduce using rule 22 (expression -> PARENL expression PARENR .)
-    LESS            reduce using rule 22 (expression -> PARENL expression PARENR .)
-    GREATEQ         reduce using rule 22 (expression -> PARENL expression PARENR .)
-    LESSEQ          reduce using rule 22 (expression -> PARENL expression PARENR .)
-    AND             reduce using rule 22 (expression -> PARENL expression PARENR .)
-    OR              reduce using rule 22 (expression -> PARENL expression PARENR .)
-    NAME            reduce using rule 22 (expression -> PARENL expression PARENR .)
-    CONSTANT        reduce using rule 22 (expression -> PARENL expression PARENR .)
-    DEF             reduce using rule 22 (expression -> PARENL expression PARENR .)
-    IF              reduce using rule 22 (expression -> PARENL expression PARENR .)
-    FOR             reduce using rule 22 (expression -> PARENL expression PARENR .)
-    WHILE           reduce using rule 22 (expression -> PARENL expression PARENR .)
-    $end            reduce using rule 22 (expression -> PARENL expression PARENR .)
-    END             reduce using rule 22 (expression -> PARENL expression PARENR .)
-    ELSE            reduce using rule 22 (expression -> PARENL expression PARENR .)
-    DO              reduce using rule 22 (expression -> PARENL expression PARENR .)
-    PARENR          reduce using rule 22 (expression -> PARENL expression PARENR .)
+    PLUS            reduce using rule 21 (expression -> PARENL expression PARENR .)
+    MINUS           reduce using rule 21 (expression -> PARENL expression PARENR .)
+    TIMES           reduce using rule 21 (expression -> PARENL expression PARENR .)
+    DIVIDE          reduce using rule 21 (expression -> PARENL expression PARENR .)
+    GREATER         reduce using rule 21 (expression -> PARENL expression PARENR .)
+    LESS            reduce using rule 21 (expression -> PARENL expression PARENR .)
+    GREATEQ         reduce using rule 21 (expression -> PARENL expression PARENR .)
+    LESSEQ          reduce using rule 21 (expression -> PARENL expression PARENR .)
+    AND             reduce using rule 21 (expression -> PARENL expression PARENR .)
+    OR              reduce using rule 21 (expression -> PARENL expression PARENR .)
+    NAME            reduce using rule 21 (expression -> PARENL expression PARENR .)
+    CONSTANT        reduce using rule 21 (expression -> PARENL expression PARENR .)
+    DEF             reduce using rule 21 (expression -> PARENL expression PARENR .)
+    IF              reduce using rule 21 (expression -> PARENL expression PARENR .)
+    FOR             reduce using rule 21 (expression -> PARENL expression PARENR .)
+    $end            reduce using rule 21 (expression -> PARENL expression PARENR .)
+    END             reduce using rule 21 (expression -> PARENL expression PARENR .)
+    ELSE            reduce using rule 21 (expression -> PARENL expression PARENR .)
+    DO              reduce using rule 21 (expression -> PARENL expression PARENR .)
+    PARENR          reduce using rule 21 (expression -> PARENL expression PARENR .)
 
 
-state 44
+state 41
 
     (4) statement -> NAME EQUALS expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
     END             reduce using rule 4 (statement -> NAME EQUALS expression .)
     NAME            reduce using rule 4 (statement -> NAME EQUALS expression .)
@@ -1355,531 +1219,498 @@ state 44
     DEF             reduce using rule 4 (statement -> NAME EQUALS expression .)
     IF              reduce using rule 4 (statement -> NAME EQUALS expression .)
     FOR             reduce using rule 4 (statement -> NAME EQUALS expression .)
-    WHILE           reduce using rule 4 (statement -> NAME EQUALS expression .)
-    ELSE            reduce using rule 4 (statement -> NAME EQUALS expression .)
     $end            reduce using rule 4 (statement -> NAME EQUALS expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
-    AND             shift and go to state 29
-    OR              shift and go to state 30
+    ELSE            reduce using rule 4 (statement -> NAME EQUALS expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+    AND             shift and go to state 27
+    OR              shift and go to state 28
+
+
+state 42
+
+    (18) expression -> expression AND expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
+
+    AND             reduce using rule 18 (expression -> expression AND expression .)
+    OR              reduce using rule 18 (expression -> expression AND expression .)
+    NAME            reduce using rule 18 (expression -> expression AND expression .)
+    CONSTANT        reduce using rule 18 (expression -> expression AND expression .)
+    DEF             reduce using rule 18 (expression -> expression AND expression .)
+    IF              reduce using rule 18 (expression -> expression AND expression .)
+    FOR             reduce using rule 18 (expression -> expression AND expression .)
+    $end            reduce using rule 18 (expression -> expression AND expression .)
+    END             reduce using rule 18 (expression -> expression AND expression .)
+    ELSE            reduce using rule 18 (expression -> expression AND expression .)
+    DO              reduce using rule 18 (expression -> expression AND expression .)
+    PARENR          reduce using rule 18 (expression -> expression AND expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+
+  ! PLUS            [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! TIMES           [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! DIVIDE          [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! GREATER         [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! LESS            [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! GREATEQ         [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! LESSEQ          [ reduce using rule 18 (expression -> expression AND expression .) ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
+
+
+state 43
+
+    (19) expression -> expression OR expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
+
+    AND             reduce using rule 19 (expression -> expression OR expression .)
+    OR              reduce using rule 19 (expression -> expression OR expression .)
+    NAME            reduce using rule 19 (expression -> expression OR expression .)
+    CONSTANT        reduce using rule 19 (expression -> expression OR expression .)
+    DEF             reduce using rule 19 (expression -> expression OR expression .)
+    IF              reduce using rule 19 (expression -> expression OR expression .)
+    FOR             reduce using rule 19 (expression -> expression OR expression .)
+    $end            reduce using rule 19 (expression -> expression OR expression .)
+    END             reduce using rule 19 (expression -> expression OR expression .)
+    ELSE            reduce using rule 19 (expression -> expression OR expression .)
+    DO              reduce using rule 19 (expression -> expression OR expression .)
+    PARENR          reduce using rule 19 (expression -> expression OR expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
+    GREATER         shift and go to state 36
+    LESS            shift and go to state 31
+    GREATEQ         shift and go to state 30
+    LESSEQ          shift and go to state 33
+
+  ! PLUS            [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! TIMES           [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! DIVIDE          [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! GREATER         [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! LESS            [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! GREATEQ         [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! LESSEQ          [ reduce using rule 19 (expression -> expression OR expression .) ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
+
+
+state 44
+
+    (13) expression -> expression DIVIDE expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
+
+    PLUS            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 13 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 13 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 13 (expression -> expression DIVIDE expression .)
+    GREATER         reduce using rule 13 (expression -> expression DIVIDE expression .)
+    LESS            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    GREATEQ         reduce using rule 13 (expression -> expression DIVIDE expression .)
+    LESSEQ          reduce using rule 13 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 13 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    NAME            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    CONSTANT        reduce using rule 13 (expression -> expression DIVIDE expression .)
+    DEF             reduce using rule 13 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    FOR             reduce using rule 13 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    END             reduce using rule 13 (expression -> expression DIVIDE expression .)
+    ELSE            reduce using rule 13 (expression -> expression DIVIDE expression .)
+    DO              reduce using rule 13 (expression -> expression DIVIDE expression .)
+    PARENR          reduce using rule 13 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 34 ]
+  ! MINUS           [ shift and go to state 35 ]
+  ! TIMES           [ shift and go to state 32 ]
+  ! DIVIDE          [ shift and go to state 29 ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 45
 
-    (19) expression -> expression AND expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (16) expression -> expression GREATEQ expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    AND             reduce using rule 19 (expression -> expression AND expression .)
-    OR              reduce using rule 19 (expression -> expression AND expression .)
-    NAME            reduce using rule 19 (expression -> expression AND expression .)
-    CONSTANT        reduce using rule 19 (expression -> expression AND expression .)
-    DEF             reduce using rule 19 (expression -> expression AND expression .)
-    IF              reduce using rule 19 (expression -> expression AND expression .)
-    FOR             reduce using rule 19 (expression -> expression AND expression .)
-    WHILE           reduce using rule 19 (expression -> expression AND expression .)
-    $end            reduce using rule 19 (expression -> expression AND expression .)
-    END             reduce using rule 19 (expression -> expression AND expression .)
-    ELSE            reduce using rule 19 (expression -> expression AND expression .)
-    DO              reduce using rule 19 (expression -> expression AND expression .)
-    PARENR          reduce using rule 19 (expression -> expression AND expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
+    GREATER         reduce using rule 16 (expression -> expression GREATEQ expression .)
+    LESS            reduce using rule 16 (expression -> expression GREATEQ expression .)
+    GREATEQ         reduce using rule 16 (expression -> expression GREATEQ expression .)
+    LESSEQ          reduce using rule 16 (expression -> expression GREATEQ expression .)
+    AND             reduce using rule 16 (expression -> expression GREATEQ expression .)
+    OR              reduce using rule 16 (expression -> expression GREATEQ expression .)
+    NAME            reduce using rule 16 (expression -> expression GREATEQ expression .)
+    CONSTANT        reduce using rule 16 (expression -> expression GREATEQ expression .)
+    DEF             reduce using rule 16 (expression -> expression GREATEQ expression .)
+    IF              reduce using rule 16 (expression -> expression GREATEQ expression .)
+    FOR             reduce using rule 16 (expression -> expression GREATEQ expression .)
+    $end            reduce using rule 16 (expression -> expression GREATEQ expression .)
+    END             reduce using rule 16 (expression -> expression GREATEQ expression .)
+    ELSE            reduce using rule 16 (expression -> expression GREATEQ expression .)
+    DO              reduce using rule 16 (expression -> expression GREATEQ expression .)
+    PARENR          reduce using rule 16 (expression -> expression GREATEQ expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
 
-  ! PLUS            [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! MINUS           [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! TIMES           [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! DIVIDE          [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! GREATER         [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! LESS            [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! GREATEQ         [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! LESSEQ          [ reduce using rule 19 (expression -> expression AND expression .) ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! PLUS            [ reduce using rule 16 (expression -> expression GREATEQ expression .) ]
+  ! MINUS           [ reduce using rule 16 (expression -> expression GREATEQ expression .) ]
+  ! TIMES           [ reduce using rule 16 (expression -> expression GREATEQ expression .) ]
+  ! DIVIDE          [ reduce using rule 16 (expression -> expression GREATEQ expression .) ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 46
 
-    (20) expression -> expression OR expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (15) expression -> expression LESS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    AND             reduce using rule 20 (expression -> expression OR expression .)
-    OR              reduce using rule 20 (expression -> expression OR expression .)
-    NAME            reduce using rule 20 (expression -> expression OR expression .)
-    CONSTANT        reduce using rule 20 (expression -> expression OR expression .)
-    DEF             reduce using rule 20 (expression -> expression OR expression .)
-    IF              reduce using rule 20 (expression -> expression OR expression .)
-    FOR             reduce using rule 20 (expression -> expression OR expression .)
-    WHILE           reduce using rule 20 (expression -> expression OR expression .)
-    $end            reduce using rule 20 (expression -> expression OR expression .)
-    END             reduce using rule 20 (expression -> expression OR expression .)
-    ELSE            reduce using rule 20 (expression -> expression OR expression .)
-    DO              reduce using rule 20 (expression -> expression OR expression .)
-    PARENR          reduce using rule 20 (expression -> expression OR expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-    GREATER         shift and go to state 38
-    LESS            shift and go to state 33
-    GREATEQ         shift and go to state 32
-    LESSEQ          shift and go to state 35
+    GREATER         reduce using rule 15 (expression -> expression LESS expression .)
+    LESS            reduce using rule 15 (expression -> expression LESS expression .)
+    GREATEQ         reduce using rule 15 (expression -> expression LESS expression .)
+    LESSEQ          reduce using rule 15 (expression -> expression LESS expression .)
+    AND             reduce using rule 15 (expression -> expression LESS expression .)
+    OR              reduce using rule 15 (expression -> expression LESS expression .)
+    NAME            reduce using rule 15 (expression -> expression LESS expression .)
+    CONSTANT        reduce using rule 15 (expression -> expression LESS expression .)
+    DEF             reduce using rule 15 (expression -> expression LESS expression .)
+    IF              reduce using rule 15 (expression -> expression LESS expression .)
+    FOR             reduce using rule 15 (expression -> expression LESS expression .)
+    $end            reduce using rule 15 (expression -> expression LESS expression .)
+    END             reduce using rule 15 (expression -> expression LESS expression .)
+    ELSE            reduce using rule 15 (expression -> expression LESS expression .)
+    DO              reduce using rule 15 (expression -> expression LESS expression .)
+    PARENR          reduce using rule 15 (expression -> expression LESS expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
 
-  ! PLUS            [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! MINUS           [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! TIMES           [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! DIVIDE          [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! GREATER         [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! LESS            [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! GREATEQ         [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! LESSEQ          [ reduce using rule 20 (expression -> expression OR expression .) ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! PLUS            [ reduce using rule 15 (expression -> expression LESS expression .) ]
+  ! MINUS           [ reduce using rule 15 (expression -> expression LESS expression .) ]
+  ! TIMES           [ reduce using rule 15 (expression -> expression LESS expression .) ]
+  ! DIVIDE          [ reduce using rule 15 (expression -> expression LESS expression .) ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 47
 
-    (14) expression -> expression DIVIDE expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (12) expression -> expression TIMES expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    PLUS            reduce using rule 14 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 14 (expression -> expression DIVIDE expression .)
-    TIMES           reduce using rule 14 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 14 (expression -> expression DIVIDE expression .)
-    GREATER         reduce using rule 14 (expression -> expression DIVIDE expression .)
-    LESS            reduce using rule 14 (expression -> expression DIVIDE expression .)
-    GREATEQ         reduce using rule 14 (expression -> expression DIVIDE expression .)
-    LESSEQ          reduce using rule 14 (expression -> expression DIVIDE expression .)
-    AND             reduce using rule 14 (expression -> expression DIVIDE expression .)
-    OR              reduce using rule 14 (expression -> expression DIVIDE expression .)
-    NAME            reduce using rule 14 (expression -> expression DIVIDE expression .)
-    CONSTANT        reduce using rule 14 (expression -> expression DIVIDE expression .)
-    DEF             reduce using rule 14 (expression -> expression DIVIDE expression .)
-    IF              reduce using rule 14 (expression -> expression DIVIDE expression .)
-    FOR             reduce using rule 14 (expression -> expression DIVIDE expression .)
-    WHILE           reduce using rule 14 (expression -> expression DIVIDE expression .)
-    $end            reduce using rule 14 (expression -> expression DIVIDE expression .)
-    END             reduce using rule 14 (expression -> expression DIVIDE expression .)
-    ELSE            reduce using rule 14 (expression -> expression DIVIDE expression .)
-    DO              reduce using rule 14 (expression -> expression DIVIDE expression .)
-    PARENR          reduce using rule 14 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 12 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 12 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 12 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 12 (expression -> expression TIMES expression .)
+    GREATER         reduce using rule 12 (expression -> expression TIMES expression .)
+    LESS            reduce using rule 12 (expression -> expression TIMES expression .)
+    GREATEQ         reduce using rule 12 (expression -> expression TIMES expression .)
+    LESSEQ          reduce using rule 12 (expression -> expression TIMES expression .)
+    AND             reduce using rule 12 (expression -> expression TIMES expression .)
+    OR              reduce using rule 12 (expression -> expression TIMES expression .)
+    NAME            reduce using rule 12 (expression -> expression TIMES expression .)
+    CONSTANT        reduce using rule 12 (expression -> expression TIMES expression .)
+    DEF             reduce using rule 12 (expression -> expression TIMES expression .)
+    IF              reduce using rule 12 (expression -> expression TIMES expression .)
+    FOR             reduce using rule 12 (expression -> expression TIMES expression .)
+    $end            reduce using rule 12 (expression -> expression TIMES expression .)
+    END             reduce using rule 12 (expression -> expression TIMES expression .)
+    ELSE            reduce using rule 12 (expression -> expression TIMES expression .)
+    DO              reduce using rule 12 (expression -> expression TIMES expression .)
+    PARENR          reduce using rule 12 (expression -> expression TIMES expression .)
 
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! TIMES           [ shift and go to state 34 ]
-  ! DIVIDE          [ shift and go to state 31 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! PLUS            [ shift and go to state 34 ]
+  ! MINUS           [ shift and go to state 35 ]
+  ! TIMES           [ shift and go to state 32 ]
+  ! DIVIDE          [ shift and go to state 29 ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 48
 
-    (17) expression -> expression GREATEQ expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (17) expression -> expression LESSEQ expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    GREATER         reduce using rule 17 (expression -> expression GREATEQ expression .)
-    LESS            reduce using rule 17 (expression -> expression GREATEQ expression .)
-    GREATEQ         reduce using rule 17 (expression -> expression GREATEQ expression .)
-    LESSEQ          reduce using rule 17 (expression -> expression GREATEQ expression .)
-    AND             reduce using rule 17 (expression -> expression GREATEQ expression .)
-    OR              reduce using rule 17 (expression -> expression GREATEQ expression .)
-    NAME            reduce using rule 17 (expression -> expression GREATEQ expression .)
-    CONSTANT        reduce using rule 17 (expression -> expression GREATEQ expression .)
-    DEF             reduce using rule 17 (expression -> expression GREATEQ expression .)
-    IF              reduce using rule 17 (expression -> expression GREATEQ expression .)
-    FOR             reduce using rule 17 (expression -> expression GREATEQ expression .)
-    WHILE           reduce using rule 17 (expression -> expression GREATEQ expression .)
-    $end            reduce using rule 17 (expression -> expression GREATEQ expression .)
-    END             reduce using rule 17 (expression -> expression GREATEQ expression .)
-    ELSE            reduce using rule 17 (expression -> expression GREATEQ expression .)
-    DO              reduce using rule 17 (expression -> expression GREATEQ expression .)
-    PARENR          reduce using rule 17 (expression -> expression GREATEQ expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
+    GREATER         reduce using rule 17 (expression -> expression LESSEQ expression .)
+    LESS            reduce using rule 17 (expression -> expression LESSEQ expression .)
+    GREATEQ         reduce using rule 17 (expression -> expression LESSEQ expression .)
+    LESSEQ          reduce using rule 17 (expression -> expression LESSEQ expression .)
+    AND             reduce using rule 17 (expression -> expression LESSEQ expression .)
+    OR              reduce using rule 17 (expression -> expression LESSEQ expression .)
+    NAME            reduce using rule 17 (expression -> expression LESSEQ expression .)
+    CONSTANT        reduce using rule 17 (expression -> expression LESSEQ expression .)
+    DEF             reduce using rule 17 (expression -> expression LESSEQ expression .)
+    IF              reduce using rule 17 (expression -> expression LESSEQ expression .)
+    FOR             reduce using rule 17 (expression -> expression LESSEQ expression .)
+    $end            reduce using rule 17 (expression -> expression LESSEQ expression .)
+    END             reduce using rule 17 (expression -> expression LESSEQ expression .)
+    ELSE            reduce using rule 17 (expression -> expression LESSEQ expression .)
+    DO              reduce using rule 17 (expression -> expression LESSEQ expression .)
+    PARENR          reduce using rule 17 (expression -> expression LESSEQ expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
 
-  ! PLUS            [ reduce using rule 17 (expression -> expression GREATEQ expression .) ]
-  ! MINUS           [ reduce using rule 17 (expression -> expression GREATEQ expression .) ]
-  ! TIMES           [ reduce using rule 17 (expression -> expression GREATEQ expression .) ]
-  ! DIVIDE          [ reduce using rule 17 (expression -> expression GREATEQ expression .) ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! PLUS            [ reduce using rule 17 (expression -> expression LESSEQ expression .) ]
+  ! MINUS           [ reduce using rule 17 (expression -> expression LESSEQ expression .) ]
+  ! TIMES           [ reduce using rule 17 (expression -> expression LESSEQ expression .) ]
+  ! DIVIDE          [ reduce using rule 17 (expression -> expression LESSEQ expression .) ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 49
 
-    (16) expression -> expression LESS expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (10) expression -> expression PLUS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    GREATER         reduce using rule 16 (expression -> expression LESS expression .)
-    LESS            reduce using rule 16 (expression -> expression LESS expression .)
-    GREATEQ         reduce using rule 16 (expression -> expression LESS expression .)
-    LESSEQ          reduce using rule 16 (expression -> expression LESS expression .)
-    AND             reduce using rule 16 (expression -> expression LESS expression .)
-    OR              reduce using rule 16 (expression -> expression LESS expression .)
-    NAME            reduce using rule 16 (expression -> expression LESS expression .)
-    CONSTANT        reduce using rule 16 (expression -> expression LESS expression .)
-    DEF             reduce using rule 16 (expression -> expression LESS expression .)
-    IF              reduce using rule 16 (expression -> expression LESS expression .)
-    FOR             reduce using rule 16 (expression -> expression LESS expression .)
-    WHILE           reduce using rule 16 (expression -> expression LESS expression .)
-    $end            reduce using rule 16 (expression -> expression LESS expression .)
-    END             reduce using rule 16 (expression -> expression LESS expression .)
-    ELSE            reduce using rule 16 (expression -> expression LESS expression .)
-    DO              reduce using rule 16 (expression -> expression LESS expression .)
-    PARENR          reduce using rule 16 (expression -> expression LESS expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
+    PLUS            reduce using rule 10 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 10 (expression -> expression PLUS expression .)
+    GREATER         reduce using rule 10 (expression -> expression PLUS expression .)
+    LESS            reduce using rule 10 (expression -> expression PLUS expression .)
+    GREATEQ         reduce using rule 10 (expression -> expression PLUS expression .)
+    LESSEQ          reduce using rule 10 (expression -> expression PLUS expression .)
+    AND             reduce using rule 10 (expression -> expression PLUS expression .)
+    OR              reduce using rule 10 (expression -> expression PLUS expression .)
+    NAME            reduce using rule 10 (expression -> expression PLUS expression .)
+    CONSTANT        reduce using rule 10 (expression -> expression PLUS expression .)
+    DEF             reduce using rule 10 (expression -> expression PLUS expression .)
+    IF              reduce using rule 10 (expression -> expression PLUS expression .)
+    FOR             reduce using rule 10 (expression -> expression PLUS expression .)
+    $end            reduce using rule 10 (expression -> expression PLUS expression .)
+    END             reduce using rule 10 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 10 (expression -> expression PLUS expression .)
+    DO              reduce using rule 10 (expression -> expression PLUS expression .)
+    PARENR          reduce using rule 10 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
 
-  ! PLUS            [ reduce using rule 16 (expression -> expression LESS expression .) ]
-  ! MINUS           [ reduce using rule 16 (expression -> expression LESS expression .) ]
-  ! TIMES           [ reduce using rule 16 (expression -> expression LESS expression .) ]
-  ! DIVIDE          [ reduce using rule 16 (expression -> expression LESS expression .) ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! TIMES           [ reduce using rule 10 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 34 ]
+  ! MINUS           [ shift and go to state 35 ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 50
 
-    (13) expression -> expression TIMES expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (11) expression -> expression MINUS expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    PLUS            reduce using rule 13 (expression -> expression TIMES expression .)
-    MINUS           reduce using rule 13 (expression -> expression TIMES expression .)
-    TIMES           reduce using rule 13 (expression -> expression TIMES expression .)
-    DIVIDE          reduce using rule 13 (expression -> expression TIMES expression .)
-    GREATER         reduce using rule 13 (expression -> expression TIMES expression .)
-    LESS            reduce using rule 13 (expression -> expression TIMES expression .)
-    GREATEQ         reduce using rule 13 (expression -> expression TIMES expression .)
-    LESSEQ          reduce using rule 13 (expression -> expression TIMES expression .)
-    AND             reduce using rule 13 (expression -> expression TIMES expression .)
-    OR              reduce using rule 13 (expression -> expression TIMES expression .)
-    NAME            reduce using rule 13 (expression -> expression TIMES expression .)
-    CONSTANT        reduce using rule 13 (expression -> expression TIMES expression .)
-    DEF             reduce using rule 13 (expression -> expression TIMES expression .)
-    IF              reduce using rule 13 (expression -> expression TIMES expression .)
-    FOR             reduce using rule 13 (expression -> expression TIMES expression .)
-    WHILE           reduce using rule 13 (expression -> expression TIMES expression .)
-    $end            reduce using rule 13 (expression -> expression TIMES expression .)
-    END             reduce using rule 13 (expression -> expression TIMES expression .)
-    ELSE            reduce using rule 13 (expression -> expression TIMES expression .)
-    DO              reduce using rule 13 (expression -> expression TIMES expression .)
-    PARENR          reduce using rule 13 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 11 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 11 (expression -> expression MINUS expression .)
+    GREATER         reduce using rule 11 (expression -> expression MINUS expression .)
+    LESS            reduce using rule 11 (expression -> expression MINUS expression .)
+    GREATEQ         reduce using rule 11 (expression -> expression MINUS expression .)
+    LESSEQ          reduce using rule 11 (expression -> expression MINUS expression .)
+    AND             reduce using rule 11 (expression -> expression MINUS expression .)
+    OR              reduce using rule 11 (expression -> expression MINUS expression .)
+    NAME            reduce using rule 11 (expression -> expression MINUS expression .)
+    CONSTANT        reduce using rule 11 (expression -> expression MINUS expression .)
+    DEF             reduce using rule 11 (expression -> expression MINUS expression .)
+    IF              reduce using rule 11 (expression -> expression MINUS expression .)
+    FOR             reduce using rule 11 (expression -> expression MINUS expression .)
+    $end            reduce using rule 11 (expression -> expression MINUS expression .)
+    END             reduce using rule 11 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 11 (expression -> expression MINUS expression .)
+    DO              reduce using rule 11 (expression -> expression MINUS expression .)
+    PARENR          reduce using rule 11 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
 
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! TIMES           [ shift and go to state 34 ]
-  ! DIVIDE          [ shift and go to state 31 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! TIMES           [ reduce using rule 11 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 11 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 34 ]
+  ! MINUS           [ shift and go to state 35 ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 51
 
-    (18) expression -> expression LESSEQ expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (14) expression -> expression GREATER expression .
+    (10) expression -> expression . PLUS expression
+    (11) expression -> expression . MINUS expression
+    (12) expression -> expression . TIMES expression
+    (13) expression -> expression . DIVIDE expression
+    (14) expression -> expression . GREATER expression
+    (15) expression -> expression . LESS expression
+    (16) expression -> expression . GREATEQ expression
+    (17) expression -> expression . LESSEQ expression
+    (18) expression -> expression . AND expression
+    (19) expression -> expression . OR expression
 
-    GREATER         reduce using rule 18 (expression -> expression LESSEQ expression .)
-    LESS            reduce using rule 18 (expression -> expression LESSEQ expression .)
-    GREATEQ         reduce using rule 18 (expression -> expression LESSEQ expression .)
-    LESSEQ          reduce using rule 18 (expression -> expression LESSEQ expression .)
-    AND             reduce using rule 18 (expression -> expression LESSEQ expression .)
-    OR              reduce using rule 18 (expression -> expression LESSEQ expression .)
-    NAME            reduce using rule 18 (expression -> expression LESSEQ expression .)
-    CONSTANT        reduce using rule 18 (expression -> expression LESSEQ expression .)
-    DEF             reduce using rule 18 (expression -> expression LESSEQ expression .)
-    IF              reduce using rule 18 (expression -> expression LESSEQ expression .)
-    FOR             reduce using rule 18 (expression -> expression LESSEQ expression .)
-    WHILE           reduce using rule 18 (expression -> expression LESSEQ expression .)
-    $end            reduce using rule 18 (expression -> expression LESSEQ expression .)
-    END             reduce using rule 18 (expression -> expression LESSEQ expression .)
-    ELSE            reduce using rule 18 (expression -> expression LESSEQ expression .)
-    DO              reduce using rule 18 (expression -> expression LESSEQ expression .)
-    PARENR          reduce using rule 18 (expression -> expression LESSEQ expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
+    GREATER         reduce using rule 14 (expression -> expression GREATER expression .)
+    LESS            reduce using rule 14 (expression -> expression GREATER expression .)
+    GREATEQ         reduce using rule 14 (expression -> expression GREATER expression .)
+    LESSEQ          reduce using rule 14 (expression -> expression GREATER expression .)
+    AND             reduce using rule 14 (expression -> expression GREATER expression .)
+    OR              reduce using rule 14 (expression -> expression GREATER expression .)
+    NAME            reduce using rule 14 (expression -> expression GREATER expression .)
+    CONSTANT        reduce using rule 14 (expression -> expression GREATER expression .)
+    DEF             reduce using rule 14 (expression -> expression GREATER expression .)
+    IF              reduce using rule 14 (expression -> expression GREATER expression .)
+    FOR             reduce using rule 14 (expression -> expression GREATER expression .)
+    $end            reduce using rule 14 (expression -> expression GREATER expression .)
+    END             reduce using rule 14 (expression -> expression GREATER expression .)
+    ELSE            reduce using rule 14 (expression -> expression GREATER expression .)
+    DO              reduce using rule 14 (expression -> expression GREATER expression .)
+    PARENR          reduce using rule 14 (expression -> expression GREATER expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+    TIMES           shift and go to state 32
+    DIVIDE          shift and go to state 29
 
-  ! PLUS            [ reduce using rule 18 (expression -> expression LESSEQ expression .) ]
-  ! MINUS           [ reduce using rule 18 (expression -> expression LESSEQ expression .) ]
-  ! TIMES           [ reduce using rule 18 (expression -> expression LESSEQ expression .) ]
-  ! DIVIDE          [ reduce using rule 18 (expression -> expression LESSEQ expression .) ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+  ! PLUS            [ reduce using rule 14 (expression -> expression GREATER expression .) ]
+  ! MINUS           [ reduce using rule 14 (expression -> expression GREATER expression .) ]
+  ! TIMES           [ reduce using rule 14 (expression -> expression GREATER expression .) ]
+  ! DIVIDE          [ reduce using rule 14 (expression -> expression GREATER expression .) ]
+  ! GREATER         [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 31 ]
+  ! GREATEQ         [ shift and go to state 30 ]
+  ! LESSEQ          [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 27 ]
+  ! OR              [ shift and go to state 28 ]
 
 
 state 52
 
-    (11) expression -> expression PLUS expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
+    (6) statement -> DEF NAME PARENL NAME . PARENR DO statements END
 
-    PLUS            reduce using rule 11 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 11 (expression -> expression PLUS expression .)
-    GREATER         reduce using rule 11 (expression -> expression PLUS expression .)
-    LESS            reduce using rule 11 (expression -> expression PLUS expression .)
-    GREATEQ         reduce using rule 11 (expression -> expression PLUS expression .)
-    LESSEQ          reduce using rule 11 (expression -> expression PLUS expression .)
-    AND             reduce using rule 11 (expression -> expression PLUS expression .)
-    OR              reduce using rule 11 (expression -> expression PLUS expression .)
-    NAME            reduce using rule 11 (expression -> expression PLUS expression .)
-    CONSTANT        reduce using rule 11 (expression -> expression PLUS expression .)
-    DEF             reduce using rule 11 (expression -> expression PLUS expression .)
-    IF              reduce using rule 11 (expression -> expression PLUS expression .)
-    FOR             reduce using rule 11 (expression -> expression PLUS expression .)
-    WHILE           reduce using rule 11 (expression -> expression PLUS expression .)
-    $end            reduce using rule 11 (expression -> expression PLUS expression .)
-    END             reduce using rule 11 (expression -> expression PLUS expression .)
-    ELSE            reduce using rule 11 (expression -> expression PLUS expression .)
-    DO              reduce using rule 11 (expression -> expression PLUS expression .)
-    PARENR          reduce using rule 11 (expression -> expression PLUS expression .)
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-
-  ! TIMES           [ reduce using rule 11 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 11 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
+    PARENR          shift and go to state 55
 
 
 state 53
-
-    (12) expression -> expression MINUS expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
-
-    PLUS            reduce using rule 12 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 12 (expression -> expression MINUS expression .)
-    GREATER         reduce using rule 12 (expression -> expression MINUS expression .)
-    LESS            reduce using rule 12 (expression -> expression MINUS expression .)
-    GREATEQ         reduce using rule 12 (expression -> expression MINUS expression .)
-    LESSEQ          reduce using rule 12 (expression -> expression MINUS expression .)
-    AND             reduce using rule 12 (expression -> expression MINUS expression .)
-    OR              reduce using rule 12 (expression -> expression MINUS expression .)
-    NAME            reduce using rule 12 (expression -> expression MINUS expression .)
-    CONSTANT        reduce using rule 12 (expression -> expression MINUS expression .)
-    DEF             reduce using rule 12 (expression -> expression MINUS expression .)
-    IF              reduce using rule 12 (expression -> expression MINUS expression .)
-    FOR             reduce using rule 12 (expression -> expression MINUS expression .)
-    WHILE           reduce using rule 12 (expression -> expression MINUS expression .)
-    $end            reduce using rule 12 (expression -> expression MINUS expression .)
-    END             reduce using rule 12 (expression -> expression MINUS expression .)
-    ELSE            reduce using rule 12 (expression -> expression MINUS expression .)
-    DO              reduce using rule 12 (expression -> expression MINUS expression .)
-    PARENR          reduce using rule 12 (expression -> expression MINUS expression .)
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-
-  ! TIMES           [ reduce using rule 12 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 12 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
-
-
-state 54
-
-    (15) expression -> expression GREATER expression .
-    (11) expression -> expression . PLUS expression
-    (12) expression -> expression . MINUS expression
-    (13) expression -> expression . TIMES expression
-    (14) expression -> expression . DIVIDE expression
-    (15) expression -> expression . GREATER expression
-    (16) expression -> expression . LESS expression
-    (17) expression -> expression . GREATEQ expression
-    (18) expression -> expression . LESSEQ expression
-    (19) expression -> expression . AND expression
-    (20) expression -> expression . OR expression
-
-    GREATER         reduce using rule 15 (expression -> expression GREATER expression .)
-    LESS            reduce using rule 15 (expression -> expression GREATER expression .)
-    GREATEQ         reduce using rule 15 (expression -> expression GREATER expression .)
-    LESSEQ          reduce using rule 15 (expression -> expression GREATER expression .)
-    AND             reduce using rule 15 (expression -> expression GREATER expression .)
-    OR              reduce using rule 15 (expression -> expression GREATER expression .)
-    NAME            reduce using rule 15 (expression -> expression GREATER expression .)
-    CONSTANT        reduce using rule 15 (expression -> expression GREATER expression .)
-    DEF             reduce using rule 15 (expression -> expression GREATER expression .)
-    IF              reduce using rule 15 (expression -> expression GREATER expression .)
-    FOR             reduce using rule 15 (expression -> expression GREATER expression .)
-    WHILE           reduce using rule 15 (expression -> expression GREATER expression .)
-    $end            reduce using rule 15 (expression -> expression GREATER expression .)
-    END             reduce using rule 15 (expression -> expression GREATER expression .)
-    ELSE            reduce using rule 15 (expression -> expression GREATER expression .)
-    DO              reduce using rule 15 (expression -> expression GREATER expression .)
-    PARENR          reduce using rule 15 (expression -> expression GREATER expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 34
-    DIVIDE          shift and go to state 31
-
-  ! PLUS            [ reduce using rule 15 (expression -> expression GREATER expression .) ]
-  ! MINUS           [ reduce using rule 15 (expression -> expression GREATER expression .) ]
-  ! TIMES           [ reduce using rule 15 (expression -> expression GREATER expression .) ]
-  ! DIVIDE          [ reduce using rule 15 (expression -> expression GREATER expression .) ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS            [ shift and go to state 33 ]
-  ! GREATEQ         [ shift and go to state 32 ]
-  ! LESSEQ          [ shift and go to state 35 ]
-  ! AND             [ shift and go to state 29 ]
-  ! OR              [ shift and go to state 30 ]
-
-
-state 55
-
-    (10) statement -> WHILE expression DO statements . END
-    (1) statements -> statements . statement
-    (4) statement -> . NAME EQUALS expression
-    (5) statement -> . CONSTANT expression
-    (6) statement -> . DEF NAME PARENL NAME PARENR DO statements END
-    (7) statement -> . IF expression DO statements END
-    (8) statement -> . IF expression DO statements ELSE statements END
-    (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-
-    END             shift and go to state 59
-    NAME            shift and go to state 21
-    CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-
-    statement                      shift and go to state 22
-
-state 56
-
-    (6) statement -> DEF NAME PARENL NAME . PARENR DO statements END
-
-    PARENR          shift and go to state 60
-
-
-state 57
 
     (7) statement -> IF expression DO statements . END
     (8) statement -> IF expression DO statements . ELSE statements END
@@ -1890,49 +1721,32 @@ state 57
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
 
-    END             shift and go to state 61
-    ELSE            shift and go to state 62
-    NAME            shift and go to state 21
+    END             shift and go to state 56
+    ELSE            shift and go to state 57
+    NAME            shift and go to state 19
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
 
-    statement                      shift and go to state 22
+    statement                      shift and go to state 20
 
-state 58
+state 54
 
     (9) statement -> FOR NAME FOREXPR NAME . DO statements END
 
-    DO              shift and go to state 63
+    DO              shift and go to state 58
 
 
-state 59
-
-    (10) statement -> WHILE expression DO statements END .
-
-    END             reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    NAME            reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    CONSTANT        reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    DEF             reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    IF              reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    FOR             reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    WHILE           reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    ELSE            reduce using rule 10 (statement -> WHILE expression DO statements END .)
-    $end            reduce using rule 10 (statement -> WHILE expression DO statements END .)
-
-
-state 60
+state 55
 
     (6) statement -> DEF NAME PARENL NAME PARENR . DO statements END
 
-    DO              shift and go to state 64
+    DO              shift and go to state 59
 
 
-state 61
+state 56
 
     (7) statement -> IF expression DO statements END .
 
@@ -1942,12 +1756,11 @@ state 61
     DEF             reduce using rule 7 (statement -> IF expression DO statements END .)
     IF              reduce using rule 7 (statement -> IF expression DO statements END .)
     FOR             reduce using rule 7 (statement -> IF expression DO statements END .)
-    WHILE           reduce using rule 7 (statement -> IF expression DO statements END .)
-    ELSE            reduce using rule 7 (statement -> IF expression DO statements END .)
     $end            reduce using rule 7 (statement -> IF expression DO statements END .)
+    ELSE            reduce using rule 7 (statement -> IF expression DO statements END .)
 
 
-state 62
+state 57
 
     (8) statement -> IF expression DO statements ELSE . statements END
     (1) statements -> . statements statement
@@ -1959,47 +1772,45 @@ state 62
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    NAME            shift and go to state 14
+    NAME            shift and go to state 13
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
 
-    statements                     shift and go to state 65
-    expression                     shift and go to state 17
-    statement                      shift and go to state 9
+    statements                     shift and go to state 60
+    expression                     shift and go to state 16
+    statement                      shift and go to state 8
 
-state 63
+state 58
 
     (9) statement -> FOR NAME FOREXPR NAME DO . statements END
     (1) statements -> . statements statement
@@ -2011,47 +1822,45 @@ state 63
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    NAME            shift and go to state 14
+    NAME            shift and go to state 13
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
 
-    expression                     shift and go to state 17
-    statements                     shift and go to state 66
-    statement                      shift and go to state 9
+    expression                     shift and go to state 16
+    statements                     shift and go to state 61
+    statement                      shift and go to state 8
 
-state 64
+state 59
 
     (6) statement -> DEF NAME PARENL NAME PARENR DO . statements END
     (1) statements -> . statements statement
@@ -2063,47 +1872,45 @@ state 64
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
-    (11) expression -> . expression PLUS expression
-    (12) expression -> . expression MINUS expression
-    (13) expression -> . expression TIMES expression
-    (14) expression -> . expression DIVIDE expression
-    (15) expression -> . expression GREATER expression
-    (16) expression -> . expression LESS expression
-    (17) expression -> . expression GREATEQ expression
-    (18) expression -> . expression LESSEQ expression
-    (19) expression -> . expression AND expression
-    (20) expression -> . expression OR expression
-    (21) expression -> . MINUS expression
-    (22) expression -> . PARENL expression PARENR
-    (23) expression -> . INT
-    (24) expression -> . DOUBLE
-    (25) expression -> . CHAR
-    (26) expression -> . TRUE
-    (27) expression -> . FALSE
-    (28) expression -> . STRING
-    (29) expression -> . NAME
+    (10) expression -> . expression PLUS expression
+    (11) expression -> . expression MINUS expression
+    (12) expression -> . expression TIMES expression
+    (13) expression -> . expression DIVIDE expression
+    (14) expression -> . expression GREATER expression
+    (15) expression -> . expression LESS expression
+    (16) expression -> . expression GREATEQ expression
+    (17) expression -> . expression LESSEQ expression
+    (18) expression -> . expression AND expression
+    (19) expression -> . expression OR expression
+    (20) expression -> . MINUS expression
+    (21) expression -> . PARENL expression PARENR
+    (22) expression -> . INT
+    (23) expression -> . DOUBLE
+    (24) expression -> . CHAR
+    (25) expression -> . TRUE
+    (26) expression -> . FALSE
+    (27) expression -> . STRING
+    (28) expression -> . NAME
 
-    NAME            shift and go to state 14
+    NAME            shift and go to state 13
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
-    MINUS           shift and go to state 6
-    PARENL          shift and go to state 12
-    INT             shift and go to state 15
-    DOUBLE          shift and go to state 16
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
+    MINUS           shift and go to state 5
+    PARENL          shift and go to state 11
+    INT             shift and go to state 14
+    DOUBLE          shift and go to state 15
     CHAR            shift and go to state 2
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 13
-    STRING          shift and go to state 8
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    STRING          shift and go to state 7
 
-    expression                     shift and go to state 17
-    statements                     shift and go to state 67
-    statement                      shift and go to state 9
+    expression                     shift and go to state 16
+    statements                     shift and go to state 62
+    statement                      shift and go to state 8
 
-state 65
+state 60
 
     (8) statement -> IF expression DO statements ELSE statements . END
     (1) statements -> statements . statement
@@ -2113,19 +1920,17 @@ state 65
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
 
-    END             shift and go to state 68
-    NAME            shift and go to state 21
+    END             shift and go to state 63
+    NAME            shift and go to state 19
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
 
-    statement                      shift and go to state 22
+    statement                      shift and go to state 20
 
-state 66
+state 61
 
     (9) statement -> FOR NAME FOREXPR NAME DO statements . END
     (1) statements -> statements . statement
@@ -2135,19 +1940,17 @@ state 66
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
 
-    END             shift and go to state 69
-    NAME            shift and go to state 21
+    END             shift and go to state 64
+    NAME            shift and go to state 19
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
 
-    statement                      shift and go to state 22
+    statement                      shift and go to state 20
 
-state 67
+state 62
 
     (6) statement -> DEF NAME PARENL NAME PARENR DO statements . END
     (1) statements -> statements . statement
@@ -2157,19 +1960,17 @@ state 67
     (7) statement -> . IF expression DO statements END
     (8) statement -> . IF expression DO statements ELSE statements END
     (9) statement -> . FOR NAME FOREXPR NAME DO statements END
-    (10) statement -> . WHILE expression DO statements END
 
-    END             shift and go to state 70
-    NAME            shift and go to state 21
+    END             shift and go to state 65
+    NAME            shift and go to state 19
     CONSTANT        shift and go to state 1
-    DEF             shift and go to state 7
-    IF              shift and go to state 10
-    FOR             shift and go to state 11
-    WHILE           shift and go to state 3
+    DEF             shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 10
 
-    statement                      shift and go to state 22
+    statement                      shift and go to state 20
 
-state 68
+state 63
 
     (8) statement -> IF expression DO statements ELSE statements END .
 
@@ -2179,12 +1980,11 @@ state 68
     DEF             reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
     IF              reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
     FOR             reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
-    WHILE           reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
-    ELSE            reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
     $end            reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
+    ELSE            reduce using rule 8 (statement -> IF expression DO statements ELSE statements END .)
 
 
-state 69
+state 64
 
     (9) statement -> FOR NAME FOREXPR NAME DO statements END .
 
@@ -2194,12 +1994,11 @@ state 69
     DEF             reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
     IF              reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
     FOR             reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
-    WHILE           reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
-    ELSE            reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
     $end            reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
+    ELSE            reduce using rule 9 (statement -> FOR NAME FOREXPR NAME DO statements END .)
 
 
-state 70
+state 65
 
     (6) statement -> DEF NAME PARENL NAME PARENR DO statements END .
 
@@ -2209,7 +2008,6 @@ state 70
     DEF             reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
     IF              reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
     FOR             reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
-    WHILE           reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
-    ELSE            reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
     $end            reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
+    ELSE            reduce using rule 6 (statement -> DEF NAME PARENL NAME PARENR DO statements END .)
 

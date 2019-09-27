@@ -3,7 +3,10 @@ import ply.yacc as yacc
 
 # Numero de tests
 test_num = 15 + 1
-# Palabras reservadas del lenguaje
+
+""" Palabras reservadas del lenguaje
+ Cada una de ellas es definida y agregada a la lista de tokens"""
+
 reserved = {
     'def': 'DEF',
     'do': 'DO',
@@ -11,15 +14,16 @@ reserved = {
     'end': 'END',
     'for': 'FOR',
     'if': 'IF',
-    'while': 'WHILE',
     'true': 'TRUE',
     'false': 'FALSE'
+    # 'while': 'WHILE',
     # 'gets': 'GETS',
     # 'puts': 'PUTS',
     # 'io': 'IO'
 }
 
-# Lista de token que acepta el parser unida con las palabras reservadas
+""" Lista de token que acepta el parser unida con las palabras reservadas """
+
 tokens = [
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'CONSTANT',
     'GREATEQ', 'LESSEQ', 'AND',
@@ -29,9 +33,9 @@ tokens = [
     # 'COMMA'
 ] + list(reserved.values())
 
-# print(tokens)
-
-# Expresiones regulares que identifican a cada token
+""" Expresiones regulares que identifican a cada token
+ Dependiendo del la expresion regular se asigna el valor del token al
+ lo leido """
 
 # t_COMMA = r','
 # t_COMMENT = r'\#.*'
@@ -62,6 +66,8 @@ t_STRING = r'\"[a-zA-Z0-9_\ ][a-zA-Z0-9_\ ]*\"'
 t_TIMES = r'\*'
 t_TRUE = r'true'
 
+# Expresion para definir que se leyo un nombre de variable
+
 
 def t_NAME(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -69,16 +75,15 @@ def t_NAME(t):
         t.type = reserved[t.value]
     return t
 
-
-# def t_NUMBER(t):
-#     r'\d+'
-#     t.value = int(t.value)
-#     return t
+# Si la linea comienza con un # o el texto esta entre tres comillas
+# """texto"""" se ignora y no se tokeniza
 
 
 def t_COMMENT(t):
     r'(\"\"\"(.|\n)*?\"\"\")|(\#.*)|(\r)'
     pass
+
+# Expresion para leer e identificar un doble
 
 
 def t_DOUBLE(t):
@@ -90,6 +95,8 @@ def t_DOUBLE(t):
         t.value = 0
     return t
 
+# Expresion para leer e identificar un int
+
 
 def t_INT(t):
     r'[0-9]+'
@@ -100,10 +107,14 @@ def t_INT(t):
         t.value = 0
     return t
 
+# Lee saltos de linea y los agrega al lexer para saber el numero de linea
+
 
 def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
+
+# Imprime un error si un caracter no es identificado
 
 
 def t_error(t):
@@ -111,7 +122,11 @@ def t_error(t):
     t.lexer.skip(1)
 
 
+""" Aqui se construye el lexer"""
 lexer = lex.lex()
+
+""" Lee cada uno de los archivos de prueba y tokeniza su contenido imprimiendo
+    cada token conforme lo lee"""
 
 print("TOKEN TEST WITH " + str(test_num) + " FILES")
 for num in range(test_num):
@@ -129,7 +144,7 @@ for num in range(test_num):
 
 # Definicion de presedencia de operadores
 precedence = (
-    ('left', 'DO', 'END', 'AND', 'OR', 'IF', 'ELSE', 'FOR', 'WHILE', 'TRUE',
+    ('left', 'DO', 'END', 'AND', 'OR', 'IF', 'ELSE', 'FOR', 'TRUE',
      'FALSE', 'FOREXPR', 'NAME'),
     ('left', 'EQUALS', 'CONSTANT', 'CHAR', 'INT',
      'STRING', 'DOUBLE'),
@@ -146,11 +161,15 @@ names = {}
 # def p_comment(t):
 #     '''statement : COMMENT'''
 
+# Caso base de donde todo se va construido
+
 
 def p_expr(t):
     '''statements : statements statement
         | statement
         | expression'''
+
+# Si lee un nombre o una constante espera una expresion despues
 
 
 def p_assign(t):
@@ -158,9 +177,13 @@ def p_assign(t):
                  | CONSTANT expression
                  '''
 
+# Para definir que se esta haciendo una funcion
+
 
 def p_func(t):
     '''statement : DEF NAME PARENL NAME PARENR DO statements END'''
+
+# Para definir un if y sus dos posibilidades
 
 
 def p_if(t):
@@ -168,13 +191,15 @@ def p_if(t):
                  | IF expression DO statements ELSE statements END
                  '''
 
+# Para definir la estructira de un if
+
 
 def p_for(t):
     'statement : FOR NAME FOREXPR NAME DO statements END'
 
-
-def p_while(t):
-    'statement : WHILE expression DO statements END'
+# Los while no existen en elixir ya que en esencia es funcional
+# def p_while(t):
+#     'statement : WHILE expression DO statements END'
 
 # def p_puts(t):
 #     '''statement : IO PUTS PARENL statement PARENR
@@ -189,6 +214,8 @@ def p_while(t):
 # def p_number(t):
 #     'expression : NUMBER'
 
+# Para definir las operaciones binarias
+
 
 def p_binary(t):
     '''expression : expression PLUS expression
@@ -196,6 +223,8 @@ def p_binary(t):
                   | expression TIMES expression
                   | expression DIVIDE expression
                   '''
+
+# Para definir las operaciones de comparacion (aun no el ==)
 
 
 def p_comparison(t):
@@ -206,41 +235,61 @@ def p_comparison(t):
                   | expression AND expression
                   | expression OR expression'''
 
+# Para definir que se esta definiendo un numero negativo
+
 
 def p_minus(t):
     'expression : MINUS expression %prec UMINUS'
+
+# Para definir que un grupo es algo dentro de parentesis
 
 
 def p_group(t):
     'expression : PARENL expression PARENR'
 
+# Definir que un expr puede ser un int
+
 
 def p_int(t):
     'expression : INT'
+
+# O doble
 
 
 def p_double(t):
     'expression : DOUBLE'
 
+# O char
+
 
 def p_char(t):
     'expression : CHAR'
+
+# O un true
 
 
 def p_true(t):
     'expression : TRUE'
 
+# O un false
+
 
 def p_false(t):
     'expression : FALSE'
+
+# O una cadena de caracters
 
 
 def p_string(t):
     'expression : STRING'
 
+# o el nombre de una variable
+
 
 def p_name(t):
     'expression : NAME'
+
+# Aqui se imprime el error si existe alguno
 
 
 def p_error(t):
@@ -248,7 +297,11 @@ def p_error(t):
         print("Syntax error at '%s'" % t.value)
 
 
+# Se construye el parser
 parser = yacc.yacc()
+
+""" Lee cada uno de los archivos de prueba y parsea su contenido imprimiendo
+    en caso de un error el error o en caso de que se ejecuto correctamente nada"""
 
 print("\n\nPARSE TEST WITH " + str(test_num) + " FILES")
 for num in range(test_num):
