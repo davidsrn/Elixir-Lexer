@@ -2,7 +2,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 
 # Numero de tests
-test_num = 15 + 1
+test_num = 16 + 1
 
 """ Palabras reservadas del lenguaje
  Cada una de ellas es definida y agregada a la lista de tokens"""
