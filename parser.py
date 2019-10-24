@@ -2,14 +2,17 @@ import ply.lex as lex
 import ply.yacc as yacc
 import pprint as pp
 
+
 class Scope(object):
     def __init__(self):
-        self.i=1
+        self.i = 1
+
+
 scope = Scope()
 
 test = input("numero de test > ")
 
-test = "test"+str(test)+".ex"
+test = "test" + str(test) + ".ex"
 
 # Numero de tests
 test_num = 16 + 1
@@ -84,7 +87,7 @@ t_TRUE = r'true'
 def t_NAME(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if reserved.has_key(t.value):
-    # if t.value in reserved:
+        # if t.value in reserved:
         t.type = reserved[t.value]
     # t.value = (t.value, symbol_lookup(t.value))
     return t
@@ -166,7 +169,6 @@ with open("tests/" + test, 'r') as file:
     print("-----------------------------------")
 
 
-
 # Definicion de presedencia de operadores
 precedence = (
     ('left', 'DO', 'END', 'AND', 'OR', 'IF', 'ELSE', 'FOR', 'TRUE',
@@ -182,6 +184,7 @@ precedence = (
 # Tabla de simbolos para guardar variables
 i = 0
 names = {}
+names_type = {}
 name_scope = {}
 # scopes=[{}]
 # def p_comment(t):
@@ -200,31 +203,35 @@ name_scope = {}
 #     print("ENDSCOPE")
 #     scopes.pop()
 
+
 def p_expr(t):
     '''statements : statements statement
         | statement
         | expression'''
-    t[0] = ('p-expression',t[1])
+    t[0] = ('p-expression', t[1])
 # Si lee un nombre o una constante espera una expresion despues
+
 
 def p_assign_cons(t):
     '''statement : CONSTANT expression
                  '''
     name_scope[t[1][1:]] = get_scope()
-    t[0] = ('assign-expression', t[1][1:])
+    t[0] = ('assign', t[1][1:])
     names[t[0]] = t[2]
+
 
 def p_assign_var(t):
     '''statement : NAME EQUALS expression
                  '''
     name_scope[t[1]] = get_scope()
-    t[0] = ('assign-expression', t[1])
+    t[0] = ('assign', t[1])
     names[t[0]] = t[3]
+
 
 def p_func(t):
     '''statement : DEF NAME PARENL NAME PARENR DO new_scope statements end_scope END
                  | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END '''
-    t[0] = ('func-statement',t[7])
+    t[0] = ('func-statement', t[7])
 # Para definir un if y sus dos posibilidades
 
 
@@ -232,14 +239,14 @@ def p_if(t):
     '''statement : IF new_scope expression end_scope DO new_scope statements end_scope END
                  | IF new_scope expression end_scope DO new_scope statements ELSE new_scope statements end_scope END
                  '''
-    t[0] = ('if-expression-statement',t[1], t[3])
+    t[0] = ('if-expression-statement', t[1], t[3])
 # Para definir la estructira de un if
 
 
 def p_for(t):
     'statement : FOR NAME FOREXPR NAME DO new_scope statements end_scope END'
     name_scope[t[2]] = get_scope()
-    t[0] = ('for-expression',t[6])
+    t[0] = ('for-expression', t[6])
 # Los while no existen en elixir ya que en esencia es funcional
 # def p_while(t):
 #     'statement : WHILE expression DO statements END'
@@ -258,14 +265,38 @@ def p_for(t):
 #     'expression : NUMBER'
 
 # Para definir las operaciones binarias
+
+
 def p_binary(t):
     '''expression : expression PLUS expression
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression
                   '''
-    t[0] = ('binary-expression', t[2],t[1],t[3])
+    t[0] = ('binary-expression', t[2], t[1], t[3])
+    while(True):
+        if(t[1][0] == 'name'):
+            # print(names)
+            t[1] = names[('assign', t[1][1])]
+            # t[1][1] = names[('assign-expression', t[1][1])][1]
+            # t[1][0] = names[('assign-expression', t[1][1])][0]
+            # print(t[1])
+        else:
+            break;
+    while(True):
+        if(t[3][0] == 'name'):
+            t[3] = names[('assign', t[3][1])]
+            # t[3][1] = names[('assign-expression', t[3][1])][1]
+            # t[3][0] = names[('assign-expression', t[3][1])][0]
+            # print(t[3])
+        else:
+            break;
+
+    if(t[1][0] != t[3][0]):
+        if(not((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int"))):
+            print("Can't do "+t[0][1]+" with " + t[1][0] +" and " + t[3][0] )
 # Para definir las operaciones de comparacion (aun no el
+
 
 def p_comparison(t):
     '''expression : expression GREATER expression
@@ -274,55 +305,78 @@ def p_comparison(t):
                   | expression LESSEQ expression
                   | expression AND expression
                   | expression OR expression'''
-    t[0] = ('binary-expression',t[2])
+    t[0] = ('binary-expression', t[2], t[1], t[3])
+    while(True):
+        if(t[1][0] == 'name'):
+            # print(names)
+            t[1] = names[('assign', t[1][1])]
+            # t[1][1] = names[('assign-expression', t[1][1])][1]
+            # t[1][0] = names[('assign-expression', t[1][1])][0]
+            # print(t[1])
+        else:
+            break;
+    while(True):
+        if(t[3][0] == 'name'):
+            t[3] = names[('assign', t[3][1])]
+            # t[3][1] = names[('assign-expression', t[3][1])][1]
+            # t[3][0] = names[('assign-expression', t[3][1])][0]
+            # print(t[3])
+        else:
+            break;
+
+    if(t[1][0] != t[3][0]):
+        if((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int")):
+            print("")
+        else:
+            print("Can't do "+t[0][1]+" with " + t[1][0] +" and " + t[3][0] )
 # Para definir que se esta definiendo un numero negativo
 
 
 def p_minus(t):
     'expression : MINUS expression %prec UMINUS'
-    t[0] = ('min-expression',t[2])
+    t[0] = ('min-expression', t[2])
 # Para definir que un grupo es algo dentro de parentesis
 
 
 def p_group(t):
     'expression : PARENL new_scope expression end_scope PARENR'
-    t[0] = ('group-expression',t[2])
+    t[0] = ('group-expression', t[2])
 # Definir que un expr puede ser un int
 
 
 def p_int(t):
     'expression : INT'
-    t[0] = ('int-expression',t[1])
+    t[0] = ('int', t[1])
 # O doble
 
 
 def p_double(t):
     'expression : DOUBLE'
-    t[0] = ('double-expression',t[1])
+    t[0] = ('double', t[1])
 # O char
 
 
 def p_char(t):
     'expression : CHAR'
-    t[0] = ('char-expression',t[1])
+    t[0] = ('char', t[1])
 # O un true
 
 
 def p_true(t):
     'expression : TRUE'
-    t[0] = ('true-expression',t[1])
+    t[0] = ('true', t[1])
 # O un false
 
 
 def p_false(t):
     'expression : FALSE'
-    t[0] = ('false-expression',t[1])
+    t[0] = ('false', t[1])
 # O una cadena de caracters
 
 
 def p_string(t):
     'expression : STRING'
-    t[0] = ('str-expression',t[1])
+    t[0] = ('string', t[1])
 # o el nombre de una variable
 
 # def p_forname(t):
@@ -331,30 +385,37 @@ def p_string(t):
 #     t[0] = ('forname-expresion', t[1])
 
 
-
 def p_name(t):
     'expression : NAME'
-    if name_scope.has_key(t[1]):
+        # print(name_scope)/
+    t[0] = ('name', t[1])
+    if name_scope.has_key(t[0][1]):
         if(get_scope() < name_scope[t[1]]):
-            print("Var "+t[1]+" not accesible in this scope")
+            print("Var " + t[1] + " not accesible in this scope")
             # print(name_scope)
     else:
-        print("Var " + t[1] +" doesn't exist")
-        # print(name_scope)/
-    t[0] = ('name-expression',t[1])
+        print("Var " + t[1] + " doesn't exist")
+        name_scope[t[0][1]] = t[1]
+        names[('assign', t[0][1])] = ('int', t[0][1])
+        # print(names)
+
 
 def p_empty(p):
     'empty :'
     pass
 
+
 def del_scope():
-    scope.i = scope.i-1
+    scope.i = scope.i - 1
+
 
 def add_scope():
-    scope.i = scope.i+1
+    scope.i = scope.i + 1
+
 
 def get_scope():
     return scope.i
+
 
 def p_new_scope(t):
     "new_scope : empty"
@@ -364,6 +425,7 @@ def p_new_scope(t):
     # scopes.append({})
     add_scope()
     # print(get_scope())
+
 
 def p_end_scope(t):
     " end_scope : empty"
@@ -422,8 +484,10 @@ parser = yacc.yacc()
 with open("tests/" + test, 'r') as file:
     data = file.read()
 res = parser.parse(data)
-pp.pprint(names)
 print("-----------------------------------")
+print("TREE")
+print("-----------------------------------")
+pp.pprint(names)
 # pp.pprint(name_scope)
 parser.restart()
-# print("-----------------------------------")
+print("-----------------------------------")
