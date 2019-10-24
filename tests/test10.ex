@@ -7,8 +7,8 @@
 def process(args) do
   # A constant
   @cont 0
-  for y <- args do
-      for z <- y do
+  for y<- args do
+      for z<- y do
         if y < 7 do
           password = "alumno"
           if 9.31 > 10 do
