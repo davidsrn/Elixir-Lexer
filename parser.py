@@ -282,7 +282,7 @@ def p_binary(t):
             # t[1][0] = names[('assign-expression', t[1][1])][0]
             # print(t[1])
         else:
-            break;
+            break
     while(True):
         if(t[3][0] == 'name'):
             t[3] = names[('assign', t[3][1])]
@@ -290,11 +290,12 @@ def p_binary(t):
             # t[3][0] = names[('assign-expression', t[3][1])][0]
             # print(t[3])
         else:
-            break;
+            break
 
     if(t[1][0] != t[3][0]):
         if(not((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int"))):
-            print("Can't do "+t[0][1]+" with " + t[1][0] +" and " + t[3][0] )
+            print("Can't do " + t[0][1] + " with " +
+                  t[1][0] + " and " + t[3][0])
 # Para definir las operaciones de comparacion (aun no el
 
 
@@ -314,7 +315,7 @@ def p_comparison(t):
             # t[1][0] = names[('assign-expression', t[1][1])][0]
             # print(t[1])
         else:
-            break;
+            break
     while(True):
         if(t[3][0] == 'name'):
             t[3] = names[('assign', t[3][1])]
@@ -322,13 +323,14 @@ def p_comparison(t):
             # t[3][0] = names[('assign-expression', t[3][1])][0]
             # print(t[3])
         else:
-            break;
+            break
 
     if(t[1][0] != t[3][0]):
         if((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int")):
             print("")
         else:
-            print("Can't do "+t[0][1]+" with " + t[1][0] +" and " + t[3][0] )
+            print("Can't do " + t[0][1] + " with " +
+                  t[1][0] + " and " + t[3][0])
 # Para definir que se esta definiendo un numero negativo
 
 
@@ -387,16 +389,16 @@ def p_string(t):
 
 def p_name(t):
     'expression : NAME'
-        # print(name_scope)/
+    # print(name_scope)/
     t[0] = ('name', t[1])
     if name_scope.has_key(t[0][1]):
         if(get_scope() < name_scope[t[1]]):
             print("Var " + t[1] + " not accesible in this scope")
             # print(name_scope)
     else:
-        print("Var " + t[1] + " doesn't exist")
+        print("Var " + t[1] + " doesn't exist or is iterator")
         name_scope[t[0][1]] = t[1]
-        names[('assign', t[0][1])] = ('int', t[0][1])
+        names[('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
         # print(names)
 
 
