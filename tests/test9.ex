@@ -1,3 +1,5 @@
+x = 1
+y = 1
 if x < 3 do
 
   for x <- list do

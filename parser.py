@@ -1,14 +1,21 @@
+#!/usr/bin/env python2
+import pip
+
+def install(package):
+    if hasattr(pip, 'main'):
+        pip.main(['install', package])
+    # else:
+    #     pip._internal.main(['install', package])
+
+install("pprint")
+install("ply")
+
 import ply.lex as lex
 import ply.yacc as yacc
 import pprint as pp
 
 
-class Scope(object):
-    def __init__(self):
-        self.i = 1
 
-
-scope = Scope()
 
 test = input("numero de test > ")
 
@@ -183,10 +190,11 @@ precedence = (
 )
 # Tabla de simbolos para guardar variables
 i = 0
-names = {}
-names_type = {}
-name_scope = {}
-# scopes=[{}]
+# names = {}
+# names_type = {}
+# name_scope = {}
+scopes=[{}]
+tree = {}
 # def p_comment(t):
 #     '''statement : COMMENT'''
 
@@ -208,45 +216,75 @@ def p_expr(t):
     '''statements : statements statement
         | statement
         | expression'''
-    t[0] = ('p-expression', t[1])
+    if(len(t) == 3):
+        t[0] = ('p-expression', t[1], t[2])
+    else:
+        t[0] = ('p-expression', t[1])
+
 # Si lee un nombre o una constante espera una expresion despues
 
 
 def p_assign_cons(t):
     '''statement : CONSTANT expression
                  '''
-    name_scope[t[1][1:]] = get_scope()
+    # pp.pprint(scopes)
+    # name_scope[t[1][1:]] = get_scope()
+
     t[0] = ('assign', t[1][1:])
-    names[t[0]] = t[2]
+    # print(t[0])
+    # print(t[2])
+    scopes[-1][t[0]] = t[2]
+    # tree[t[0]] = t[0]
+    # names[t[0]] = t[2]
 
 
 def p_assign_var(t):
     '''statement : NAME EQUALS expression
                  '''
-    name_scope[t[1]] = get_scope()
+    # pp.pprint(scopes)
+    # name_scope[t[1]] = get_scope()
     t[0] = ('assign', t[1])
-    names[t[0]] = t[3]
+    # tree[t[0]] = t[0]
+    scopes[-1][t[0]] = t[3]
+    # names[t[0]] = t[3]
 
 
 def p_func(t):
     '''statement : DEF NAME PARENL NAME PARENR DO new_scope statements end_scope END
-                 | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END '''
-    t[0] = ('func-statement', t[7])
+                 | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END
+                 | DEF NAME DO new_scope statements end_scope END'''
+    # pp.pprint(scopes)
+    if(len(t)==11):
+        t[0] = ('func-statement', t[2], t[8])
+    else:
+        t[0] = ('func-statement', t[2], t[5])
+    tree[t[0]] = t[0]
 # Para definir un if y sus dos posibilidades
 
+def p_if_scope(t):
+    'statement : new_scope if_statement end_scope'
 
 def p_if(t):
-    '''statement : IF new_scope expression end_scope DO new_scope statements end_scope END
-                 | IF new_scope expression end_scope DO new_scope statements ELSE new_scope statements end_scope END
+    '''if_statement : IF expression DO statements END
+                 | IF expression DO statements ELSE statements END
                  '''
-    t[0] = ('if-expression-statement', t[1], t[3])
+    if(len(t)==6):
+        t[0] = ('if-statement', t[2], t[4])
+    else:
+        t[0] = ('if-statement', t[2], t[4], t[5])
+
+    tree[t[0]] = t[0]
 # Para definir la estructira de un if
+
+
 
 
 def p_for(t):
     'statement : FOR NAME FOREXPR NAME DO new_scope statements end_scope END'
-    name_scope[t[2]] = get_scope()
-    t[0] = ('for-expression', t[6])
+    # name_scope[t[2]] = get_scope()
+    t[0] = ('for-expression', t[2], t[7])
+    tree[t[0]] = t[0]
+
 # Los while no existen en elixir ya que en esencia es funcional
 # def p_while(t):
 #     'statement : WHILE expression DO statements END'
@@ -272,65 +310,70 @@ def p_binary(t):
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression
-                  '''
-    t[0] = ('binary-expression', t[2], t[1], t[3])
-    while(True):
-        if(t[1][0] == 'name'):
-            # print(names)
-            t[1] = names[('assign', t[1][1])]
-            # t[1][1] = names[('assign-expression', t[1][1])][1]
-            # t[1][0] = names[('assign-expression', t[1][1])][0]
-            # print(t[1])
-        else:
-            break
-    while(True):
-        if(t[3][0] == 'name'):
-            t[3] = names[('assign', t[3][1])]
-            # t[3][1] = names[('assign-expression', t[3][1])][1]
-            # t[3][0] = names[('assign-expression', t[3][1])][0]
-            # print(t[3])
-        else:
-            break
-
-    if(t[1][0] != t[3][0]):
-        if(not((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int"))):
-            print("Can't do " + t[0][1] + " with " +
-                  t[1][0] + " and " + t[3][0])
-# Para definir las operaciones de comparacion (aun no el
-
-
-def p_comparison(t):
-    '''expression : expression GREATER expression
+                  | expression GREATER expression
                   | expression LESS expression
                   | expression GREATEQ expression
                   | expression LESSEQ expression
                   | expression AND expression
-                  | expression OR expression'''
+                  | expression OR expression
+                  '''
     t[0] = ('binary-expression', t[2], t[1], t[3])
+    flag = True
     while(True):
         if(t[1][0] == 'name'):
-            # print(names)
-            t[1] = names[('assign', t[1][1])]
-            # t[1][1] = names[('assign-expression', t[1][1])][1]
-            # t[1][0] = names[('assign-expression', t[1][1])][0]
-            # print(t[1])
+            if(scopes[-1].has_key(('assign', t[1][1]))):
+                t[1] = scopes[-1][('assign', t[1][1])]
+            else:
+                # print("Var out of scope")
+                flag = not flag
+                break
         else:
             break
     while(True):
         if(t[3][0] == 'name'):
-            t[3] = names[('assign', t[3][1])]
-            # t[3][1] = names[('assign-expression', t[3][1])][1]
-            # t[3][0] = names[('assign-expression', t[3][1])][0]
-            # print(t[3])
+            if(scopes[-1].has_key(('assign', t[1][1]))):
+                t[3] = scopes[-1][('assign', t[3][1])]
+            else:
+                # print("Var out of scope")
+                flag = not flag
+                break
         else:
             break
 
-    if(t[1][0] != t[3][0]):
-        if((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int")):
-            print("")
-        else:
+    if(t[1][0] != t[3][0] and flag):
+        if(not((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int"))):
             print("Can't do " + t[0][1] + " with " +
                   t[1][0] + " and " + t[3][0])
+    tree[t[0]] = t[0]
+
+# Para definir las operaciones de comparacion (aun no el
+
+
+# def p_comparison(t):
+#     '''expression : expression GREATER expression
+#                   | expression LESS expression
+#                   | expression GREATEQ expression
+#                   | expression LESSEQ expression
+#                   | expression AND expression
+#                   | expression OR expression'''
+#     t[0] = ('binary-expression', t[2], t[1], t[3])
+#     while(True):
+#         if(t[1][0] == 'name'):
+#             t[1] = scopes[-1][('assign', t[1][1])]
+#         else:
+#             break
+#     while(True):
+#         if(t[3][0] == 'name'):
+#             t[3] = scopes[-1][('assign', t[3][1])]
+#         else:
+#             break
+#
+#     if(t[1][0] != t[3][0]):
+#         if((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int")):
+#             print("")
+#         else:
+#             print("Can't do " + t[0][1] + " with " +
+#                   t[1][0] + " and " + t[3][0])
 # Para definir que se esta definiendo un numero negativo
 
 
@@ -391,15 +434,21 @@ def p_name(t):
     'expression : NAME'
     # print(name_scope)/
     t[0] = ('name', t[1])
-    if name_scope.has_key(t[0][1]):
-        if(get_scope() < name_scope[t[1]]):
-            print("Var " + t[1] + " not accesible in this scope")
-            # print(name_scope)
-    else:
-        print("Var " + t[1] + " doesn't exist or is iterator")
-        name_scope[t[0][1]] = t[1]
-        names[('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
-        # print(names)
+    # print(t[0][1])
+    # print(scopes[-1])
+    if not scopes[-1].has_key(('assign', t[0][1])):
+        # scopes[-1][('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
+        print("Var " + t[1] + " doesn't exist")
+        # print("Var " + t[1] + " doesn't exist, is outside scope or is iterator")
+    # if name_scope.has_key(t[0][1]):
+    #     if(get_scope() < name_scope[t[1]]):
+    #         print("Var " + t[1] + " not accesible in this scope")
+    #         # print(name_scope)
+    # else:
+    #     print("Var " + t[1] + " doesn't exist or is iterator")
+    #     name_scope[t[0][1]] = t[1]
+    #     # names[('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
+    #     # print(names)
 
 
 def p_empty(p):
@@ -421,40 +470,23 @@ def get_scope():
 
 def p_new_scope(t):
     "new_scope : empty"
-    # Create a new scope for local variables
-    # names = {}
-    # print("NEW SCOPE")
-    # scopes.append({})
-    add_scope()
-    # print(get_scope())
+    # pp.pprint(scopes)
+    scopes.append(scopes[-1].copy())
+    # pp.pprint(scopes)
+    # FRIKID DICCIONARIOS EN PYTHON SON APUNTADORES A UN OBJETO EN VEZ DE
+    # HACER UNA COPIA IMPLICITA CUANDO SE IGUALAN ENTRE SI
+    # scopes[-1] = scopes[-2]
+    # pp.pprint(scopes)
 
 
 def p_end_scope(t):
     " end_scope : empty"
-    # print("ENDSCOPE")
-    del_scope()
-    # print(get_scope())
-    # scopes.pop()
+    # pp.pprint(scopes)
+    scopes.pop()
+    # pp.pprint(scopes)
+
 
 # Aqui se imprime el error si existe alguno
-
-
-# def p_error(t):
-#     if t != None:
-#         print("Syntax error at '%s'" % t.value)
-#
-# def p_error(t):
-#      print("Whoa. No sabes escribir en elixir you n00b.")
-#      if not t:
-#          print("End of File!")
-#          return
-#
-#      # Read ahead looking for a closing '}'
-#      while True:
-#          tok = parser.token()             # Get the next token
-#          if not tok or tok.type == 'RBRACE':
-#              break
-#      parser.restart()
 
 def p_error(p):
     if p:
@@ -489,7 +521,21 @@ res = parser.parse(data)
 print("-----------------------------------")
 print("TREE")
 print("-----------------------------------")
-pp.pprint(names)
+# pp.pprint(names)
+# print(tree)
+# for x in tree:
+#     print (x),
+#     for n in range(i):
+#         print("\t"),
+#     for y in x:
+#         print("\t"),
+#         print (y)
+#         i = i+1
+
+tree = tree.values()
+tree.reverse()
+pp.pprint(tree)
+
 # pp.pprint(name_scope)
 parser.restart()
 print("-----------------------------------")

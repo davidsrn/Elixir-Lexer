@@ -2,7 +2,8 @@
   This is a whole simple program with my
   define tokens
 """
-
+y = 9
+z = "iter"
 # A simple function
 def process(args) do
   # A constant
@@ -19,5 +20,4 @@ def process(args) do
         end
     end
   end
-
 end
