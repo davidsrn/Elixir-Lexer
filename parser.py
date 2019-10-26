@@ -1,20 +1,19 @@
 #!/usr/bin/env python2
+# import pprint as pp
+import ply.yacc as yacc
+import ply.lex as lex
 import pip
 
-def install(package):
-    if hasattr(pip, 'main'):
-        pip.main(['install', package])
-    # else:
-    #     pip._internal.main(['install', package])
-
-install("pprint")
-install("ply")
-
-import ply.lex as lex
-import ply.yacc as yacc
-import pprint as pp
-
-
+#
+# def install(package):
+#     if hasattr(pip, 'main'):
+#         pip.main(['install', package])
+#     # else:
+#     #     pip._internal.main(['install', package])
+#
+#
+# install("pprint")
+# install("ply")
 
 
 test = input("numero de test > ")
@@ -193,7 +192,7 @@ i = 0
 # names = {}
 # names_type = {}
 # name_scope = {}
-scopes=[{}]
+scopes = [{}]
 tree = {}
 # def p_comment(t):
 #     '''statement : COMMENT'''
@@ -254,29 +253,29 @@ def p_func(t):
                  | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END
                  | DEF NAME DO new_scope statements end_scope END'''
     # pp.pprint(scopes)
-    if(len(t)==11):
+    if(len(t) == 11):
         t[0] = ('func-statement', t[2], t[8])
     else:
         t[0] = ('func-statement', t[2], t[5])
     tree[t[0]] = t[0]
 # Para definir un if y sus dos posibilidades
 
+
 def p_if_scope(t):
     'statement : new_scope if_statement end_scope'
+
 
 def p_if(t):
     '''if_statement : IF expression DO statements END
                  | IF expression DO statements ELSE statements END
                  '''
-    if(len(t)==6):
+    if(len(t) == 6):
         t[0] = ('if-statement', t[2], t[4])
     else:
         t[0] = ('if-statement', t[2], t[4], t[5])
 
     tree[t[0]] = t[0]
 # Para definir la estructira de un if
-
-
 
 
 def p_for(t):
@@ -534,7 +533,12 @@ print("-----------------------------------")
 
 tree = tree.values()
 tree.reverse()
-pp.pprint(tree)
+# pp.pprint(tree)
+for leaf in tree:
+    print(leaf)
+    for data in leaf:
+        print("\t"),
+        print(data)
 
 # pp.pprint(name_scope)
 parser.restart()
