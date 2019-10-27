@@ -49,7 +49,7 @@ tokens = [
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'CONSTANT',
     'GREATEQ', 'LESSEQ', 'AND',
     'PARENL', 'PARENR', 'CHAR', 'OR',
-    'NAME', 'INT', 'DOUBLE', 'GREATER', 'LESS',
+    'NAME', 'INT', 'DOUBLE', 'GREATER', 'LESS', 'DEQUALS',
     'STRING'
     # 'COMMA'
 ] + list(reserved.values())
@@ -70,6 +70,7 @@ t_CONSTANT = r'\@[a-zA-Z_][a-zA-Z0-9_]*'
 t_DEF = r'def'
 t_DIVIDE = r'/'
 t_EQUALS = r'='
+t_DEQUALS = r'=='
 t_FALSE = r'false'
 # t_GETS = r'gets'
 t_GREATEQ = r'>='
@@ -268,6 +269,7 @@ def p_binary(t):
                   | expression LESSEQ expression
                   | expression AND expression
                   | expression OR expression
+                  | expression DEQUALS expression
                   '''
     t[0] = ('binary-expression', t[2], t[1], t[3])
     flag = True
