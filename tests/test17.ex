@@ -3,7 +3,6 @@ def fun() do
   s = "s"
   c = 1
   x = s
-  z = x + c
   doubl = 10.2
   car = c + doubl
 

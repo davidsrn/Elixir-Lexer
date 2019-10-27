@@ -2,7 +2,7 @@
 # import pprint as pp
 import ply.yacc as yacc
 import ply.lex as lex
-import pip
+import sys
 
 #
 # def install(package):
@@ -16,9 +16,10 @@ import pip
 # install("ply")
 
 
-test = input("numero de test > ")
-
-test = "test" + str(test) + ".ex"
+# test = input("numero de test > ")
+# print(sys.argv)
+# test = "test" + str(test) + ".ex"
+test = "test" + str(sys.argv[1]) + ".ex"
 
 # Numero de tests
 test_num = 16 + 1
@@ -104,6 +105,7 @@ def t_NAME(t):
 
 def t_COMMENT(t):
     r'(\"\"\"(.|\n)*?\"\"\")|(\#.*)|(\r)'
+    t.lineno += t.value.count('\n')
     pass
 
 # Expresion para leer e identificar un doble
@@ -141,7 +143,7 @@ def t_NEWLINE(t):
 
 
 def t_error(t):
-    print("Invalid character '%s'" % t.value[0])
+    print("Invalid character '{0}' at {1}", t.value[0], t.lineno)
     t.lexer.skip(1)
 
 
@@ -164,15 +166,15 @@ lexer = lex.lex()
 #         print(tok)
 #     print("-----------------------------------")
 
-with open("tests/" + test, 'r') as file:
-    data = file.read()
-    res = lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break      # No more input
-        print(tok)
-    print("-----------------------------------")
+# with open("tests/" + test, 'r') as file:
+#     data = file.read()
+#     res = lexer.input(data)
+#     while True:
+#         tok = lexer.token()
+#         if not tok:
+#             break      # No more input
+#         print(tok)
+#     print("-----------------------------------")
 
 
 # Definicion de presedencia de operadores
@@ -197,7 +199,6 @@ tree = {}
 # def p_comment(t):
 #     '''statement : COMMENT'''
 
-# Caso base de donde todo se va construido
 #
 # def p_new_scope(t):
 #      "new_scope : statement"
@@ -210,15 +211,18 @@ tree = {}
 #     print("ENDSCOPE")
 #     scopes.pop()
 
-
+# Caso base de donde todo se va construido
+# NOTA: todos los scopes son llamados cuando se ve un scope[-1]
 def p_expr(t):
     '''statements : statements statement
         | statement
         | expression'''
     if(len(t) == 3):
-        t[0] = ('p-expression', t[1], t[2])
+        # t[0] = (p-expression', t[1], t[2])
+        t[0] = (t[1], t[2])
     else:
-        t[0] = ('p-expression', t[1])
+        # t[0] = ('p-expression', t[1])
+        t[0] = (t[1])
 
 # Si lee un nombre o una constante espera una expresion despues
 
@@ -233,21 +237,22 @@ def p_assign_cons(t):
     # print(t[0])
     # print(t[2])
     scopes[-1][t[0]] = t[2]
-    # tree[t[0]] = t[0]
+    tree[t[0]] = t[0]
     # names[t[0]] = t[2]
 
 
 def p_assign_var(t):
     '''statement : NAME EQUALS expression
+                 | NAME EQUALS expression PARENL expression PARENR
                  '''
     # pp.pprint(scopes)
     # name_scope[t[1]] = get_scope()
     t[0] = ('assign', t[1])
-    # tree[t[0]] = t[0]
+    tree[t[0]] = t[0]
     scopes[-1][t[0]] = t[3]
     # names[t[0]] = t[3]
 
-
+# Define una funcion y agrega su nombre a la tabla de simbolos
 def p_func(t):
     '''statement : DEF NAME PARENL NAME PARENR DO new_scope statements end_scope END
                  | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END
@@ -258,9 +263,10 @@ def p_func(t):
     else:
         t[0] = ('func-statement', t[2], t[5])
     tree[t[0]] = t[0]
+    scopes[-1][('assign', t[2])] = t[2]
 # Para definir un if y sus dos posibilidades
 
-
+# Esto hace psoible hacer un nuevo scope para los ifs
 def p_if_scope(t):
     'statement : new_scope if_statement end_scope'
 
@@ -438,6 +444,8 @@ def p_name(t):
     if not scopes[-1].has_key(('assign', t[0][1])):
         # scopes[-1][('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
         print("Var " + t[1] + " doesn't exist")
+        # print(scopes)
+
         # print("Var " + t[1] + " doesn't exist, is outside scope or is iterator")
     # if name_scope.has_key(t[0][1]):
     #     if(get_scope() < name_scope[t[1]]):
@@ -493,7 +501,7 @@ def p_error(p):
         # Just discard the token and tell the parser it's okay.
         parser.errok()
     # else:
-        # print("Syntax error at EOF")
+    #     print("Syntax error at EOF")
 
 
 # Se construye el parser
@@ -514,8 +522,14 @@ parser = yacc.yacc()
 #     pp.pprint(name_scope)
 #     parser.restart()
 #     print("-----------------------------------")
+print("Code to test:")
+print("-----------------------------------")
 with open("tests/" + test, 'r') as file:
     data = file.read()
+    print(data)
+print("-----------------------------------")
+print("Errors (if any):")
+print("-----------------------------------")
 res = parser.parse(data)
 print("-----------------------------------")
 print("TREE")
@@ -531,15 +545,46 @@ print("-----------------------------------")
 #         print (y)
 #         i = i+1
 
-tree = tree.values()
-tree.reverse()
+# tree = tree.values()
+# tree.reverse()
 # pp.pprint(tree)
+flag = False
 for leaf in tree:
-    print(leaf)
+    # print(leaf)
     for data in leaf:
-        print("\t"),
-        print(data)
-
-# pp.pprint(name_scope)
+        if not data == None:
+            if isinstance(data, tuple):
+                for a in range(i):
+                    print("| "),
+                # print("| "),
+                print(data)
+                # for info in data:
+                #     print("| "),
+                #     if not info == "name" or name ==:
+                #         print(info)
+                i=i-1
+            elif data == "assign":
+                for a in range(i):
+                    print("| "),
+                print(data),
+                flag = True
+                # print(" " + data[0] + " " + data[1])
+                i=i-1
+            #     print(""),
+            elif data == "+" or data == "-" or data == ">" or data == "<":
+                for a in range(i):
+                    print("| "),
+                i=i-1
+                # print("| "),
+                print(data)
+            else:
+                if not flag:
+                    for a in range(i):
+                        print("| "),
+                flag = False
+                print(data)
+        i = i+1
+        #     print(info)
+    i=i-1
 parser.restart()
 print("-----------------------------------")
