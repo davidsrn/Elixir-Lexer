@@ -153,28 +153,14 @@ lexer = lex.lex()
 """ Lee cada uno de los archivos de prueba y tokeniza su contenido imprimiendo
     cada token conforme lo lee"""
 
-# print("TOKEN TEST WITH " + str(test_num) + " FILES")
-# for num in range(test_num):
-#     print("Lexer test number " + str(num))
-#     with open("tests/test" + str(num) + ".ex", 'r') as file:
-#         data = file.read()
-#     res = lexer.input(data)
-#     while True:
-#         tok = lexer.token()
-#         if not tok:
-#             break      # No more input
-#         print(tok)
-#     print("-----------------------------------")
-
-# with open("tests/" + test, 'r') as file:
-#     data = file.read()
-#     res = lexer.input(data)
-#     while True:
-#         tok = lexer.token()
-#         if not tok:
-#             break      # No more input
-#         print(tok)
-#     print("-----------------------------------")
+with open("tests/" + test, 'r') as file:
+    data = file.read()
+    res = lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break      # No more input
+        # print(tok)
 
 
 # Definicion de presedencia de operadores
@@ -189,27 +175,11 @@ precedence = (
     ('left', 'PARENL', 'PARENR'),
     ('right', 'UMINUS'),
 )
-# Tabla de simbolos para guardar variables
 i = 0
-# names = {}
-# names_type = {}
-# name_scope = {}
+# Tabla de simbolos para guardar variables
 scopes = [{}]
+# Arbol para imprimir todo
 tree = {}
-# def p_comment(t):
-#     '''statement : COMMENT'''
-
-#
-# def p_new_scope(t):
-#      "new_scope : statement"
-#      # Create a new scope for local variables
-#      # names = {}
-#      print("NEW SCOPE")
-#      scopes.append({})
-# def p_end_scope(t):
-#     " end_scope : "
-#     print("ENDSCOPE")
-#     scopes.pop()
 
 # Caso base de donde todo se va construido
 # NOTA: todos los scopes son llamados cuando se ve un scope[-1]
@@ -230,34 +200,24 @@ def p_expr(t):
 def p_assign_cons(t):
     '''statement : CONSTANT expression
                  '''
-    # pp.pprint(scopes)
-    # name_scope[t[1][1:]] = get_scope()
-
     t[0] = ('assign', t[1][1:])
-    # print(t[0])
-    # print(t[2])
     scopes[-1][t[0]] = t[2]
     tree[t[0]] = t[0]
-    # names[t[0]] = t[2]
 
 
 def p_assign_var(t):
     '''statement : NAME EQUALS expression
                  | NAME EQUALS expression PARENL expression PARENR
                  '''
-    # pp.pprint(scopes)
-    # name_scope[t[1]] = get_scope()
     t[0] = ('assign', t[1])
     tree[t[0]] = t[0]
     scopes[-1][t[0]] = t[3]
-    # names[t[0]] = t[3]
 
 # Define una funcion y agrega su nombre a la tabla de simbolos
 def p_func(t):
     '''statement : DEF NAME PARENL NAME PARENR DO new_scope statements end_scope END
                  | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END
                  | DEF NAME DO new_scope statements end_scope END'''
-    # pp.pprint(scopes)
     if(len(t) == 11):
         t[0] = ('func-statement', t[2], t[8])
     else:
@@ -293,19 +253,6 @@ def p_for(t):
 # Los while no existen en elixir ya que en esencia es funcional
 # def p_while(t):
 #     'statement : WHILE expression DO statements END'
-
-# def p_puts(t):
-#     '''statement : IO PUTS PARENL statement PARENR
-#                  | IO PUTS statement
-#                  '''
-#
-# def p_gets(t):
-#     '''statement : IO GETS NUMBER
-#     | IO GETS STRING
-#     '''
-
-# def p_number(t):
-#     'expression : NUMBER'
 
 # Para definir las operaciones binarias
 
@@ -351,34 +298,6 @@ def p_binary(t):
                   t[1][0] + " and " + t[3][0])
     tree[t[0]] = t[0]
 
-# Para definir las operaciones de comparacion (aun no el
-
-
-# def p_comparison(t):
-#     '''expression : expression GREATER expression
-#                   | expression LESS expression
-#                   | expression GREATEQ expression
-#                   | expression LESSEQ expression
-#                   | expression AND expression
-#                   | expression OR expression'''
-#     t[0] = ('binary-expression', t[2], t[1], t[3])
-#     while(True):
-#         if(t[1][0] == 'name'):
-#             t[1] = scopes[-1][('assign', t[1][1])]
-#         else:
-#             break
-#     while(True):
-#         if(t[3][0] == 'name'):
-#             t[3] = scopes[-1][('assign', t[3][1])]
-#         else:
-#             break
-#
-#     if(t[1][0] != t[3][0]):
-#         if((t[1][0] == "double" and t[3][0] == "int") or (t[3][0] == "double" and t[1][0] == "int")):
-#             print("")
-#         else:
-#             print("Can't do " + t[0][1] + " with " +
-#                   t[1][0] + " and " + t[3][0])
 # Para definir que se esta definiendo un numero negativo
 
 
@@ -429,68 +348,26 @@ def p_string(t):
     t[0] = ('string', t[1])
 # o el nombre de una variable
 
-# def p_forname(t):
-#     'expression : FORNAME'
-#     name_scope[t[1]] = t[1]
-#     t[0] = ('forname-expresion', t[1])
-
 
 def p_name(t):
     'expression : NAME'
-    # print(name_scope)/
     t[0] = ('name', t[1])
-    # print(t[0][1])
-    # print(scopes[-1])
     if not scopes[-1].has_key(('assign', t[0][1])):
-        # scopes[-1][('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
         print("Var " + t[1] + " doesn't exist")
-        # print(scopes)
 
-        # print("Var " + t[1] + " doesn't exist, is outside scope or is iterator")
-    # if name_scope.has_key(t[0][1]):
-    #     if(get_scope() < name_scope[t[1]]):
-    #         print("Var " + t[1] + " not accesible in this scope")
-    #         # print(name_scope)
-    # else:
-    #     print("Var " + t[1] + " doesn't exist or is iterator")
-    #     name_scope[t[0][1]] = t[1]
-    #     # names[('assign', t[0][1])] = ('int', (str(t[0][1]) + "-is-iterator"))
-    #     # print(names)
-
+# Funciones para definir la creacion y destruccion de scopes
 
 def p_empty(p):
     'empty :'
     pass
 
-
-def del_scope():
-    scope.i = scope.i - 1
-
-
-def add_scope():
-    scope.i = scope.i + 1
-
-
-def get_scope():
-    return scope.i
-
-
 def p_new_scope(t):
     "new_scope : empty"
-    # pp.pprint(scopes)
     scopes.append(scopes[-1].copy())
-    # pp.pprint(scopes)
-    # FRIKID DICCIONARIOS EN PYTHON SON APUNTADORES A UN OBJETO EN VEZ DE
-    # HACER UNA COPIA IMPLICITA CUANDO SE IGUALAN ENTRE SI
-    # scopes[-1] = scopes[-2]
-    # pp.pprint(scopes)
-
 
 def p_end_scope(t):
     " end_scope : empty"
-    # pp.pprint(scopes)
     scopes.pop()
-    # pp.pprint(scopes)
 
 
 # Aqui se imprime el error si existe alguno
@@ -498,7 +375,7 @@ def p_end_scope(t):
 def p_error(p):
     if p:
         print("Syntax error at token", p.type)
-        # Just discard the token and tell the parser it's okay.
+        # Evita que pare y siga leyendo token a pesar de encontrar un error
         parser.errok()
     # else:
     #     print("Syntax error at EOF")
@@ -511,17 +388,6 @@ parser = yacc.yacc()
 """ Lee cada uno de los archivos de prueba y parsea su contenido imprimiendo
     en caso de un error el error o en caso de que se ejecuto correctamente nada"""
 
-# print("\n\nPARSE TEST WITH " + str(test_num) + " FILES")
-# for num in range(test_num):
-#     print("Test number " + str(num))
-#     with open("tests/test" + str(num) + ".ex", 'r') as file:
-#         data = file.read()
-#     res = parser.parse(data)
-#     pp.pprint(names)
-#     print("-----------------------------------")
-#     pp.pprint(name_scope)
-#     parser.restart()
-#     print("-----------------------------------")
 print("Code to test:")
 print("-----------------------------------")
 with open("tests/" + test, 'r') as file:
@@ -534,48 +400,27 @@ res = parser.parse(data)
 print("-----------------------------------")
 print("TREE")
 print("-----------------------------------")
-# pp.pprint(names)
-# print(tree)
-# for x in tree:
-#     print (x),
-#     for n in range(i):
-#         print("\t"),
-#     for y in x:
-#         print("\t"),
-#         print (y)
-#         i = i+1
-
-# tree = tree.values()
-# tree.reverse()
-# pp.pprint(tree)
 flag = False
+
+# Imprime el arbol de manera bonita
 for leaf in tree:
-    # print(leaf)
     for data in leaf:
         if not data == None:
             if isinstance(data, tuple):
                 for a in range(i):
                     print("| "),
-                # print("| "),
                 print(data)
-                # for info in data:
-                #     print("| "),
-                #     if not info == "name" or name ==:
-                #         print(info)
                 i=i-1
             elif data == "assign":
                 for a in range(i):
                     print("| "),
                 print(data),
                 flag = True
-                # print(" " + data[0] + " " + data[1])
                 i=i-1
-            #     print(""),
             elif data == "+" or data == "-" or data == ">" or data == "<":
                 for a in range(i):
                     print("| "),
                 i=i-1
-                # print("| "),
                 print(data)
             else:
                 if not flag:
@@ -584,7 +429,6 @@ for leaf in tree:
                 flag = False
                 print(data)
         i = i+1
-        #     print(info)
     i=i-1
 parser.restart()
 print("-----------------------------------")

@@ -46,5 +46,5 @@ subprocess.call(["python", "parser.py", "17"])
 
 print("---------------------------------------------------------------------------------------------------------")
 print("Mas codigos pueden ser probados ejecutando python2 parser.py \"numero de test\"")
-print("Actualmente hay de 0 a 22 pruebas")
+print("Actualmente hay de 0 a 22 pruebas dentro de la capeta tests")
 print("---------------------------------------------------------------------------------------------------------")
