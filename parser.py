@@ -184,6 +184,8 @@ tree = {}
 
 # Caso base de donde todo se va construido
 # NOTA: todos los scopes son llamados cuando se ve un scope[-1]
+
+
 def p_expr(t):
     '''statements : statements statement
         | statement
@@ -215,6 +217,8 @@ def p_assign_var(t):
     scopes[-1][t[0]] = t[3]
 
 # Define una funcion y agrega su nombre a la tabla de simbolos
+
+
 def p_func(t):
     '''statement : DEF NAME PARENL NAME PARENR DO new_scope statements end_scope END
                  | DEF NAME PARENL empty PARENR DO new_scope statements end_scope END
@@ -228,6 +232,8 @@ def p_func(t):
 # Para definir un if y sus dos posibilidades
 
 # Esto hace psoible hacer un nuevo scope para los ifs
+
+
 def p_if_scope(t):
     'statement : new_scope if_statement end_scope'
 
@@ -359,13 +365,16 @@ def p_name(t):
 
 # Funciones para definir la creacion y destruccion de scopes
 
+
 def p_empty(p):
     'empty :'
     pass
 
+
 def p_new_scope(t):
     "new_scope : empty"
     scopes.append(scopes[-1].copy())
+
 
 def p_end_scope(t):
     " end_scope : empty"
@@ -412,17 +421,17 @@ for leaf in tree:
                 for a in range(i):
                     print("| "),
                 print(data)
-                i=i-1
+                i = i - 1
             elif data == "assign":
                 for a in range(i):
                     print("| "),
                 print(data),
                 flag = True
-                i=i-1
+                i = i - 1
             elif data == "+" or data == "-" or data == ">" or data == "<":
                 for a in range(i):
                     print("| "),
-                i=i-1
+                i = i - 1
                 print(data)
             else:
                 if not flag:
@@ -430,7 +439,7 @@ for leaf in tree:
                         print("| "),
                 flag = False
                 print(data)
-        i = i+1
-    i=i-1
+        i = i + 1
+    i = i - 1
 parser.restart()
 print("-----------------------------------")
